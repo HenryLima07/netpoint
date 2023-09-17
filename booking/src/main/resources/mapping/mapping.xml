@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+      https://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+<!--    <mapping>-->
+<!--        <class-a>hl.booking_app.booking.entities.NpoCancha</class-a>-->
+<!--        <class-b>hl.booking_app.booking.dto.CanchaDto</class-b>-->
+<!--        <field custom-converter="HashMapToListConverter">-->
+<!--            <a>clasesGrupales</a> &lt;!&ndash; This is a Map<String,DTO> source &ndash;&gt;-->
+<!--            <b>clasesGrupales</b> &lt;!&ndash; This is a List<destionation> &ndash;&gt;-->
+<!--            <a-hint>java.util.LinkedHashSet</a-hint>-->
+<!--            <b-hint>java.util.ArrayList</b-hint>-->
+<!--        </field>-->
+
+<!--    </mapping>-->
+
+
+</mappings>
