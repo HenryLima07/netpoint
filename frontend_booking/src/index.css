@@ -136,3 +136,8 @@ textarea:focus-visible {
   font-family: "Bebas Neue";
   src: url("./assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf");
 }
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf");
+}
