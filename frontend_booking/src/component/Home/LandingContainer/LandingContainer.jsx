@@ -7,11 +7,24 @@ import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 
 const LandingText = () => {
     return(
-        <div className=" absolute bottom-44 flex flex-col items-center  font-inter text-pure-white">
-            <h3 className="uppercase text-5xl font-semibold">las mejores canchas en la zona</h3>
-            <p className="text-3xl font-medium">Haz ya tu reserva</p>
+        <div className="absolute flex flex-col items-center  font-inter text-pure-white
+            bottom-3 sm:bottom-10 lg:bottom-14 xl:bottom-20 2xl:bottom-48">
+
+            <h3 className="uppercase font-semibold
+                text-sm
+                sm:text-2xl
+                md:text-4xl 
+                lg:text-5xl 
+            ">las mejores canchas en la zona</h3>
+
+            <p className="font-medium
+                text-[0.75rem] sm:text-xl md:text-2xl lg:text-3xl">Haz ya tu reserva</p>
             
-            <BorderButton classB=" flex flex-row items-center gap-6 mt-8 font-bold text-xl text-black bg-pure-white shadow-rounded-button-yellow "> 
+            <BorderButton classB=" flex flex-row items-center justify-around gap-6 font-bold  text-black bg-pure-white shadow-rounded-button-yellow
+                mt-2 py-1 px-2 text-[0.6rem]
+                sm:text-sm sm:p-2 sm:px-4
+                md:text-md
+                lg:mt-8 lg:py-3 lg:px-8 lg:text-xl"> 
                 <p>Reservar ahora</p>
                 <EmojiPeopleIcon />
             </BorderButton>
