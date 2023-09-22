@@ -1,6 +1,6 @@
-const BorderButton = ({ classB, children, handlerClick = ()=>{} }) => {
+const BorderButton = ({ className, children, onClick = ()=>{} }) => {
     return (
-        <button className={`py-3 px-8 rounded-full hover:cursor-pointer ${classB}`} onClick={handlerClick}>
+        <button className={`rounded-full hover:cursor-pointer ${className}`} onClick={onClick}>
             {children}
         </button>
     );

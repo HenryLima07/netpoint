@@ -6,7 +6,8 @@ const LinkContainer = ({
     children
 })=>{
     return(
-        <Link className={`px-5 uppercase hover:cursor-pointer ${classLink}`} to={to}>{children}</Link>
+        <Link className={`uppercase hover:cursor-pointer ${classLink}
+            md:text-xl px-3 lg:text-xl xl:px-5 xl:text-2xl 2xl:text-3xl`} to={to}>{children}</Link>
     );
 }
 
