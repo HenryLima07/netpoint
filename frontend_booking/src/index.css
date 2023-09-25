@@ -78,15 +78,6 @@ th {
   padding: 0;
 }
 
-/* Focus on elements only when they are navigated to using the keyboard. */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: #6c5ce7 dotted 0.188rem;
-  outline-offset: 0.15rem;
-}
-
 /* Text visible only for screenreader */
 .sr-only {
   position: absolute;
@@ -123,6 +114,18 @@ textarea:focus-visible {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #ACD8CE;
 }
+
+/*input reset*/
+input, input:focus {
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+
 
 /*Fonts:*/
 @font-face {
