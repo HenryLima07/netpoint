@@ -38,56 +38,56 @@ public class WebSecurityConfig {
     private UserRol rol;
 
     @Bean
-    public JwtRequestFilter authenticationJwtTokenFilter(){
-        return  new JwtRequestFilter();
+    public JwtRequestFilter authenticationJwtTokenFilter() {
+        return new JwtRequestFilter();
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(personaService);
         authProvider.setPasswordEncoder(passwordEncoder());
 
-        return  authProvider;
+        return authProvider;
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.csrf(AbstractHttpConfigurer::disable) //csr -> csr.disabled()
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable) // csr -> csr.disabled()
                 .cors().configurationSource(corsConfigurationSource()).and()
                 .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(a -> a
-                                .antMatchers("/api/user/login").permitAll()
-                                .antMatchers("/api/user/singin").permitAll()
-                                .antMatchers("/api/persona/own/**").hasAuthority(rol.getUser())
-                                .antMatchers("api/persona/**").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/canchas/adm/**").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/canchas/**").permitAll()
-                                .antMatchers("api/paquete/adm/**").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/paquete/**").permitAll()
-                                .antMatchers("api//reserva/own").hasAuthority(rol.getUser())
-                                .antMatchers("api/paqueteComprado/own").hasAuthority(rol.getUser())
-                                .antMatchers("api/alumno/adm").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/horario/cancha/adm/**").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/clase/grupal/adm").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/clase/alumno/adm").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/clase/alumno/own").hasAuthority(rol.getUser())
-                                .antMatchers("api/horario/clase/adm").hasAuthority(rol.getAdmin())
-                                .antMatchers("api/horario/clase").permitAll()
-                                .antMatchers("api/clase/grupal").permitAll()
-                                .antMatchers("api/**").authenticated()
-//                                .anyRequest().authenticated()
+                        .antMatchers("/api/user/login").permitAll()
+                        .antMatchers("/api/user/singin").permitAll()
+                        .antMatchers("/api/persona/own/**").hasAuthority(rol.getUser())
+                        .antMatchers("api/persona/**").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/canchas/adm/**").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/canchas/**").permitAll()
+                        .antMatchers("api/paquete/adm/**").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/paquete/**").permitAll()
+                        .antMatchers("api//reserva/own").hasAuthority(rol.getUser())
+                        .antMatchers("api/paqueteComprado/own").hasAuthority(rol.getUser())
+                        .antMatchers("api/alumno/adm").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/horario/cancha/adm/**").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/clase/grupal/adm").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/clase/alumno/adm").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/clase/alumno/own").hasAuthority(rol.getUser())
+                        .antMatchers("api/horario/clase/adm").hasAuthority(rol.getAdmin())
+                        .antMatchers("api/horario/clase").permitAll()
+                        .antMatchers("api/clase/grupal").permitAll()
+                // .antMatchers("api/**").authenticated()
+                // .anyRequest().authenticated()
                 );
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -95,7 +95,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource(){
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.asList("*"));
         config.setAllowedHeaders(Arrays.asList("HEAD", "OPTIONS", "GET", "PUT", "POST", "DELETE", "PATCH"));
