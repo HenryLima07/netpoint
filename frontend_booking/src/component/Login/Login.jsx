@@ -16,10 +16,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
+import { AuthContextProvider, UseAuthContext } from "../../context/authContext";
+
 const Login =({})=>{
 
     const [ showPassword, setShowPassword ] = useState(false);
     const navigateTo = useNavigate();
+    const { login, user } = UseAuthContext();
 
     const {
         register, 
@@ -39,12 +42,21 @@ const Login =({})=>{
     );
 
     const onSuccess = async(data)=>{
-        console.log(data);
-        if(data != "")
-        navigateTo("/");
-    }  
+        const { email, password } = data;
+        if(!email || !password) {
+            toast.warn("Revisa bien tus datos e intenta de nuevo", {
+                toastId: "warning"
+            });
+            return;
+        }
+        
+        await login(email, password);
 
-    const onFail = (data)=>{
+        if(user) {
+            navigateTo("/");
+        }  
+    }
+    const onFail = ()=>{
         toast.warn("Revisa bien tus datos e intenta de nuevo", {
             toastId: "warning"
         });
