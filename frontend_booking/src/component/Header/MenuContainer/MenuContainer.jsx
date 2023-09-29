@@ -19,7 +19,7 @@ const MenuContainer = ({solid = false})=>{
     
             <div className="flex flex-row items-center justify-around min-w-1/4">
 
-                <LinkContainer to={"/"} classLink={"text-mustard-yellow mr-6"}>iniciar sesion</LinkContainer>
+                <LinkContainer to={"/singin"} classLink={"text-mustard-yellow mr-6"}>iniciar sesion</LinkContainer>
 
                 <NoBorderButton classNB={`flex flex-row items-center ${solid ? "bg-dark-gray text-pure-white" : "bg-pure-white text-dark-gray"}
                      md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl`}>

@@ -18,6 +18,7 @@ export default {
       "usafa-blue": "#004398",
       "lapis-lazuli": "#26649B",
       "neon-sky": "#229CFF",
+      "azure": "#638FF5",
       "pure-white": "#FFFFFF",
       "dark-gray": "#2E3646",
       "light-gray": "#5F6D7E",
