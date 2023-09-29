@@ -4,6 +4,7 @@ import "./App.css";
 //views
 import Home from "./view/Home";
 import LoginView from "./view/LoginView";
+import SingUpView from "./view/SingUpView";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
 
       <Route path="/" element={<Home/>}/>
       <Route path="/singin" element={<LoginView/>}/>
+      <Route path="/singup" element={<SingUpView/>}/>
 
     </Routes>
   )
