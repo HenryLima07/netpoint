@@ -2,8 +2,6 @@ import  XlviLoader  from "./XlviLoader";
 
 import { UseConfiguration } from "../../context/configContext";
 
-import gif from "../../assets/video/loader.gif"
-
 const   Loader = ()=>{
   const { loading } = UseConfiguration();
   return(

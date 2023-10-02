@@ -3,75 +3,75 @@ import styled, { keyframes } from "styled-components";
 import { useMediaQuery } from "react-responsive";
 // import "./xlviroundedloader.css";
 
-const Anim = (animParams) => keyframes`
+const Anim = (animparams) => keyframes`
 0% {
-    width: ${animParams.w[0]}px;
-    height: ${animParams.h[0]}px;
-    margin-top: ${animParams.mt[0]}px;
-    margin-left: ${animParams.ml[0]}px;
+    width: ${animparams.w[0]}px;
+    height: ${animparams.h[0]}px;
+    margin-top: ${animparams.mt[0]}px;
+    margin-left: ${animparams.ml[0]}px;
 }
 
 12.5% {
-    width: ${animParams.w[1]}px;
-    height: ${animParams.h[1]}px;
-    margin-top: ${animParams.mt[1]}px;
-    margin-left: ${animParams.ml[1]}px;
+    width: ${animparams.w[1]}px;
+    height: ${animparams.h[1]}px;
+    margin-top: ${animparams.mt[1]}px;
+    margin-left: ${animparams.ml[1]}px;
 }
 
 25% {
-    width: ${animParams.w[2]}px;
-    height: ${animParams.h[2]}px;
-    margin-top: ${animParams.mt[2]}px;
-    margin-left: ${animParams.ml[2]}px;
+    width: ${animparams.w[2]}px;
+    height: ${animparams.h[2]}px;
+    margin-top: ${animparams.mt[2]}px;
+    margin-left: ${animparams.ml[2]}px;
 }
 
 37.5% {
-    width: ${animParams.w[3]}px;
-    height: ${animParams.h[3]}px;
-    margin-top: ${animParams.mt[3]}px;
-    margin-left: ${animParams.ml[3]}px;
+    width: ${animparams.w[3]}px;
+    height: ${animparams.h[3]}px;
+    margin-top: ${animparams.mt[3]}px;
+    margin-left: ${animparams.ml[3]}px;
 }
 
 50% {
-    width: ${animParams.w[4]}px;
-    height: ${animParams.h[4]}px;
-    margin-top: ${animParams.mt[4]}px;
-    margin-left: ${animParams.ml[4]}px;
+    width: ${animparams.w[4]}px;
+    height: ${animparams.h[4]}px;
+    margin-top: ${animparams.mt[4]}px;
+    margin-left: ${animparams.ml[4]}px;
 }
 
 62.5% {
-    width: ${animParams.w[5]}px;
-    height: ${animParams.h[5]}px;
-    margin-top: ${animParams.mt[5]}px;
-    margin-left: ${animParams.ml[5]}px;
+    width: ${animparams.w[5]}px;
+    height: ${animparams.h[5]}px;
+    margin-top: ${animparams.mt[5]}px;
+    margin-left: ${animparams.ml[5]}px;
 }
 
 75% {
-    width: ${animParams.w[6]}px;
-    height: ${animParams.h[6]}px;
-    margin-top: ${animParams.mt[6]}px;
-    margin-left: ${animParams.ml[6]}px;
+    width: ${animparams.w[6]}px;
+    height: ${animparams.h[6]}px;
+    margin-top: ${animparams.mt[6]}px;
+    margin-left: ${animparams.ml[6]}px;
 }
 
 87.5% {
-    width: ${animParams.w[7]}px;
-    height: ${animParams.h[7]}px;
-    margin-top: ${animParams.mt[7]}px;
-    margin-left: ${animParams.ml[7]}px;
+    width: ${animparams.w[7]}px;
+    height: ${animparams.h[7]}px;
+    margin-top: ${animparams.mt[7]}px;
+    margin-left: ${animparams.ml[7]}px;
 }
 
 100% {
-    width: ${animParams.w[8]}px;
-    height: ${animParams.h[8]}px;
-    margin-top: ${animParams.mt[8]}px;
-    margin-left: ${animParams.ml[8]}px;
+    width: ${animparams.w[8]}px;
+    height: ${animparams.h[8]}px;
+    margin-top: ${animparams.mt[8]}px;
+    margin-left: ${animparams.ml[8]}px;
 }
 `;
 
 const StyledContainer = styled.div`
   background: ${(props) => props.background};
-  width: ${(props) => props.sizeContainer}px;
-  height: ${(props) => props.sizeContainer}px;
+  width: ${(props) => props.size_container}px;
+  height: ${(props) => props.size_container}px;
   padding: 20px;
 `;
 
@@ -79,14 +79,14 @@ const StyledBox = styled.div`
   box-sizing: border-box;
   position: absolute;
   display: block;
-  border-radius: ${(props) => props.sizeBorderRadius}px;
-  border: ${(props) => props.sizeBorderThickness}px solid
-    ${(props) => props.borderColor};
-  width: ${(props) => props.boxParams.w}px;
-  height: ${(props) => props.boxParams.h}px;
-  margin-top: ${(props) => props.boxParams.mt}px;
-  margin-left: ${(props) => props.boxParams.ml}px;
-  animation: ${(props) => Anim(props.animParams)} 3s 0s forwards
+  border-radius: ${(props) => props.size_border_radius}px;
+  border: ${(props) => props.size_border_thickness}px solid
+    ${(props) => props.border_color};
+  width: ${(props) => props.box_params.w}px;
+  height: ${(props) => props.box_params.h}px;
+  margin-top: ${(props) => props.box_params.mt}px;
+  margin-left: ${(props) => props.box_params.ml}px;
+  animation: ${(props) => Anim(props.animparams)} 3s 0s forwards
     cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 `;
 
@@ -132,9 +132,9 @@ const XlviLoader = ({
   }
 
   let sizePassed = parseFloat(sizeFound);
-  let sizeContainer = (sizePassed * 112) / 64;
-  let sizeBorderRadius = (sizePassed * 24) / 64;
-  let sizeBorderThickness = (sizePassed * 16) / 64;
+  let size_container = (sizePassed * 112) / 64;
+  let size_border_radius = (sizePassed * 24) / 64;
+  let size_border_thickness = (sizePassed * 16) / 64;
 
   let box1Params = {
     w: (sizePassed * 112) / 64,
@@ -280,32 +280,32 @@ const XlviLoader = ({
 
   return (
     <StyledContainer
-      sizeContainer={sizeContainer}
+      size_container={size_container}
       background={backgound}
       className={className}
     >
       <StyledBox
-        boxParams={box1Params}
-        sizeBorderRadius={sizeBorderRadius}
-        sizeBorderThickness={sizeBorderThickness}
-        borderColor={colorsToFill[0]}
-        animParams={anim1Params}
+        box_params={box1Params}
+        size_border_radius={size_border_radius}
+        size_border_thickness={size_border_thickness}
+        border_color={colorsToFill[0]}
+        animparams={anim1Params}
         className="box1"
       ></StyledBox>
       <StyledBox
-        boxParams={box2Params}
-        sizeBorderRadius={sizeBorderRadius}
-        sizeBorderThickness={sizeBorderThickness}
-        borderColor={colorsToFill[1]}
-        animParams={anim2Params}
+        box_params={box2Params}
+        size_border_radius={size_border_radius}
+        size_border_thickness={size_border_thickness}
+        border_color={colorsToFill[1]}
+        animparams={anim2Params}
         className="box2"
       ></StyledBox>
       <StyledBox
-        boxParams={box3Params}
-        sizeBorderRadius={sizeBorderRadius}
-        sizeBorderThickness={sizeBorderThickness}
-        borderColor={colorsToFill[2]}
-        animParams={anim3Params}
+        box_params={box3Params}
+        size_border_radius={size_border_radius}
+        size_border_thickness={size_border_thickness}
+        border_color={colorsToFill[2]}
+        animparams={anim3Params}
         className="box3"
       ></StyledBox>
     </StyledContainer>
