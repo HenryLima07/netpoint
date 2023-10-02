@@ -10,6 +10,8 @@ import { ToastContainer } from 'react-toastify'
 
 import { ConfigurationProvider} from "./context/configContext";
 import { AuthContextProvider } from "./context/authContext";
+import Loader from "./component/Loader/Loader";
+
 import "react-toastify/dist/ReactToastify.css";
 
 axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_NETPOINT_API || "";
@@ -27,6 +29,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 position="top-right"
                 pauseOnHover="false"
               />
+
+          <Loader />
         </AuthContextProvider>
       </ConfigurationProvider>
     </BrowserRouter>

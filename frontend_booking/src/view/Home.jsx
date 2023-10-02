@@ -7,9 +7,13 @@ import CourtSection from "../component/Home/CourtSection/CourtSection";
 import PromoSection from "../component/Home/PromoSection/PromoSection";
 import PhraseSection from "../component/Home/PhraseSection/PhraseSection";
 
+import Loader from "../component/Loader/Loader";
+
+
 const Home = () => {
     return(
         <div className=" flex flex-col">
+            <Loader />
             <Header />
             <LandingContainer />
             <ServicioSection />

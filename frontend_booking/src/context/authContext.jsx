@@ -95,6 +95,35 @@ export const AuthContextProvider = (props) =>{
         }
     }
 
+    const singUp = async( perNombres, perApellidos, perFechaNac, perTelefono, perEmail, perClave )=>{
+        startLoading();
+        try{
+            const { data } = await axios.post("/user/singin", {
+                perNombres, perApellidos, perFechaNac, perTelefono, perEmail, perClave
+            });
+
+            console.log(data);
+
+            toast.success("Registro de usuario exitoso", {
+                toastId: "success"
+            });
+        }
+        catch(error){
+            const { status } = error.response || { status: 500 };
+            const msg = {
+                "400": "error 400" + error.message,
+                "404": "error 404",
+                "401": "Error 401",
+                "500": "Something went wrong!",
+            }
+            toast.error(msg[String(status)], {
+                toastId: "error"
+            });
+        }
+        finally{
+            stopLoading();
+        }
+    }
     //get token state 
     const getToken = ()=> token;
 
@@ -115,8 +144,8 @@ export const AuthContextProvider = (props) =>{
         user,
         login,
         logout,
-        getToken
-        //TODO: sing up
+        getToken,
+        singUp
     }
 
     return <AuthContext.Provider value={state} {...props} />
