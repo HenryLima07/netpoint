@@ -20,4 +20,6 @@ public class PersonaRequest {
     private String perTelefono;
 
     private String perClave;
+
+    private String perAdmin = "N";
 }

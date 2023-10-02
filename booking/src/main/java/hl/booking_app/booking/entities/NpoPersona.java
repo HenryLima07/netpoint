@@ -47,6 +47,9 @@ public class NpoPersona implements Serializable {
     @Column(name = "per_clave") //, length = 20
     private String perClave;
 
+    @Column(name = "per_adm" )
+    private String perAdmin; //S o N
+
     @Column(name = "pre_fecha_registro")
     private Instant preFechaRegistro;
 
