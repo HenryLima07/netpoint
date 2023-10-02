@@ -51,6 +51,7 @@ public class UserController {
 
     @PostMapping("/singin")
     public ResponseEntity<GeneralResponseDto> singin(@RequestBody PersonaRequest req){
+      
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         req.setPerClave(encoder.encode(req.getPerClave()));
         ResponseHelpers<GeneralResponseDto> response = new ResponseHelpers<>();

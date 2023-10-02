@@ -8,5 +8,5 @@ public class PersonaReservaDto {
     private String perNombres;
     private String perApellidos;
     private String perEmail;
-
+    private String perAdmin;
 }
