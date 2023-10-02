@@ -6,9 +6,12 @@ import { ArrowLeft } from "react-bootstrap-icons";
 
 const LoginView= ()=>{
     return(
-        <main className="h-screen bg-lapis-lazuli font-inter flex items-center justify-center">
-            <div className="h-screen w-full bg-pure-white sm:rounded-xl flex flex-col justify-center sm:h-auto sm:w-[90%] md:w-4/5 lg:w-3/4 xl:w-3/5 2xl:w-[50%]">
-                <Link to={"/"} className=" flex flex-row items-center gap-3 m-6 hover:cursor-pointer text-lg md:m-8 lg:m-10 lg:text-xl">
+        <main className="h-screen font-inter flex items-center justify-center relative bg-[url('./img/formback.jpg')] bg-no-repeat bg-center bg-cover">
+            <div className="absolute w-full h-full top-0 left-0 bg-lapis-lazuli bg-opacity-20"></div>
+
+
+            <div className="h-screen w-full bg-pure-white sm:rounded-xl flex flex-col justify-center sm:h-auto sm:w-[90%] md:w-4/5 lg:w-3/4 xl:w-3/5 2xl:w-[50%] z-10">
+                <Link to={"/"} className="w-min flex flex-row items-center gap-3 m-6 hover:cursor-pointer text-lg md:m-8 lg:m-10 lg:text-xl">
                     <ArrowLeft />
                     Regresar
                 </Link>
@@ -17,7 +20,7 @@ const LoginView= ()=>{
 
                 <Login/>
 
-                <Link to={"/"} className="self-center uppercase font-bebas underline underline-offset-4 hover:cursor-pointer m-6 md:mx-8 leading-3 text-xl md:text-2xl lg:text-3xl">registrarse</Link>
+                <Link to={"/singup"} className="self-center uppercase font-bebas underline underline-offset-4 hover:cursor-pointer m-6 md:mx-8 leading-3 text-xl md:text-2xl lg:text-3xl">registrarse</Link>
             </div>
         </main>
     );
