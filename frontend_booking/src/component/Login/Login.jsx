@@ -52,9 +52,8 @@ const Login =({})=>{
         
         await login(email, password);
 
-        if(user) {
-            navigateTo("/");
-        }  
+        navigateTo("/");
+
     }
     const onFail = ()=>{
         toast.warn("Revisa bien tus datos e intenta de nuevo", {
