@@ -3,16 +3,20 @@ import { Link } from "react-router-dom";
 
 
 import MenuContainer from "./MenuContainer/MenuContainer";
+import AsideMenu from "./AsideMenu/AsideMenu.component";
 
 import Logo from "../../assets/img/logo.png";
 
 import { UseAuthContext } from "../../context/authContext";
+
 
 const Header = () => {
     const { logout } = UseAuthContext();
 
     const [solid, isSolid] = useState(false);
 
+
+    //scrolling event 
     const handleScroll = () => {
         if(window.scrollY > 0) isSolid(true);
         else isSolid(false);
@@ -31,9 +35,14 @@ const Header = () => {
                     <img src={Logo} alt="Netpoint logo" className="w-full"/>
                 </Link>
             </div>
-            <MenuContainer solid ={solid} 
-                logoutEvent = {logout} 
-            />
+            
+                {/* (screenWidth.current > 758) ?  */}
+                <MenuContainer solid ={solid} 
+                    logoutEvent = {logout} 
+                />
+                
+                <AsideMenu solid={solid} />
+            
         </header>
     );
 }

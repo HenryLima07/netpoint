@@ -8,7 +8,7 @@ import { ArrowLeft } from "react-bootstrap-icons";
 
 const SingUpView= ()=>{
     return(
-        <main className="h-screen py-10 font-inter flex items-center justify-center relative bg-[url('./img/formback.jpg')] bg-no-repeat bg-center bg-cover">
+        <main className="h-screen md:py-10 font-inter flex items-center justify-center relative bg-[url('./img/formback.jpg')] bg-no-repeat bg-center bg-cover">
             <div className="absolute w-full h-full top-0 left-0 bg-lapis-lazuli bg-opacity-20"></div>
 
             <div className="w-full bg-pure-white sm:rounded-xl flex flex-col justify-center sm:h-auto sm:w-[90%] md:w-4/5 lg:w-3/4 xl:w-3/5 2xl:w-[50%] z-10">

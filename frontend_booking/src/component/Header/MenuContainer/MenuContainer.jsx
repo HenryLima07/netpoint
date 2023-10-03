@@ -41,7 +41,7 @@ const MenuContainer = ({solid = false, ...props})=>{
 
             <ul className={`flex flex-row ${solid ? "text-dark-gray": "text-pure-white"}`}>
                 <LinkContainer to={"/"}>inicio</LinkContainer>
-                <LinkContainer to={"/"}>cancha</LinkContainer>
+                <LinkContainer to={"/"}>canchas</LinkContainer>
                 <LinkContainer to={"/"}>clases</LinkContainer>
                 <LinkContainer to={"/"}>promos</LinkContainer>
                 <LinkContainer to={"/"}>reservar</LinkContainer>
