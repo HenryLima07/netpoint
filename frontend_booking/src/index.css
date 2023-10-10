@@ -133,6 +133,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
 }
 
+/*textarea reset*/
+textarea, select {
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+  
+  background-image:none;
+  background-color:transparent;
+}
+
 
 /*Fonts:*/
 @font-face {
