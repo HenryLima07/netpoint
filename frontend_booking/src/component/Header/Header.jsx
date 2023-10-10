@@ -10,19 +10,8 @@ import Logo from "../../assets/img/logo.png";
 import { UseAuthContext } from "../../context/authContext";
 
 
-const Header = () => {
+const Header = ({solid = true}) => {
     const { logout } = UseAuthContext();
-
-    const [solid, isSolid] = useState(false);
-
-
-    //scrolling event 
-    const handleScroll = () => {
-        if(window.scrollY > 0) isSolid(true);
-        else isSolid(false);
-    }
-
-    window.addEventListener("scroll", handleScroll);
 
     return(
         <header className={`w-full flex flex-row justify-between items-center font-bebas fixed top-0 z-10 ${solid ? "bg-pure-white" : ""}
