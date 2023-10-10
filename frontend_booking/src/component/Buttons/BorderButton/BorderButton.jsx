@@ -1,6 +1,6 @@
-const BorderButton = ({ className, children, onClick = ()=>{} }) => {
+const BorderButton = ({ className, children, onClick = ()=>{}, ...props }) => {
     return (
-        <button className={`rounded-full hover:cursor-pointer ${className}`} onClick={onClick}>
+        <button className={`rounded-full hover:cursor-pointer ${className}`} onClick={onClick} {...props}>
             {children}
         </button>
     );
