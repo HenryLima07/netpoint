@@ -5,6 +5,7 @@ import "./App.css";
 import Home from "./view/Home";
 import LoginView from "./view/LoginView";
 import SingUpView from "./view/SingUpView";
+import CanchaIndView from "./view/CanchaInd.view";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/singin" element={<LoginView/>}/>
       <Route path="/singup" element={<SingUpView/>}/>
+      <Route path="/cancha" element={<CanchaIndView/>}/>
 
     </Routes>
   )
