@@ -7,8 +7,12 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        "rounded-button-yellow": "7px 7px 0px 0px #FFDE59",
-        "rounded-button-sky": "5px 5px 0px 0px #229CFF",
+        "rounded-button-yellow": "7px 7px 0px 0px #FFDE59, 7px 7px 0px 1px #000000",
+        "rounded-button-yellow-no-border": "7px 7px 0px 0px #FFDE59, 7px 7px 0px 1px #000000",
+        "rounded-button-sky": "7px 7px 0px 0px #229CFF, 7px 7px 0px 1px #000000",
+        "rounded-button-sky-no-border": "7px 7px 0px 0px #229CFF",
+        "rounded-button-lime": "7px 7px 0px 0px #CBF51A, 7px 7px 0px 1px #000000",
+        "rounded-button-lime-no-border": "7px 7px 0px 0px #CBF51A",
         "rounded-courts-location": "17px 17px 0px -3px #000000",
       }
     },
