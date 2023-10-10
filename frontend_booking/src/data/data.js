@@ -10,5 +10,8 @@ const ErrorMessages = {
     /*Number only inputs*/
     "phoneNumber": "debe de ingresar un número telefónico correcto",
 
+    /*Date*/
+    "notDate": "no se puede ingresar una fecha pasada",
+
 }
 export default ErrorMessages;
