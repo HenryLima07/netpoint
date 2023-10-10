@@ -12,7 +12,7 @@ const ClaseDescriptionContainer = ({title, subtitle, extraInfo, btnClass, divCla
                 <p className="py-3 xl:py-8 font-light text-sm lg:text-xl">{extraInfo}</p>
             </div>
                         
-            <BorderButton onClick={onClick} className={` flex flex-row items-center justify-around gap-6 font-bold  text-black bg-pure-white shadow-rounded-button-yellow ${btnClass}
+            <BorderButton onClick={onClick} className={` flex flex-row items-center justify-around gap-6 font-bold  text-black bg-pure-white ${btnClass}
                 px-2 text-sm py-2
                 sm:text-lg sm:p-2 sm:px-4
                 lg:px-8 lg:text-xl`}> 

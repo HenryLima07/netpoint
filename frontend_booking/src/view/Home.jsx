@@ -9,12 +9,25 @@ import PhraseSection from "../component/Home/PhraseSection/PhraseSection";
 
 import Loader from "../component/Loader/Loader";
 
+import { useState } from "react";
+
 
 const Home = () => {
+
+    const [solid, isSolid] = useState(false);
+
+
+    //scrolling event 
+    const handleScroll = () => {
+        if(window.scrollY > 0) isSolid(true);
+        else isSolid(false);
+    }
+
+    window.addEventListener("scroll", handleScroll);
     return(
         <div className=" flex flex-col">
             <Loader />
-            <Header />
+            <Header solid={solid} />
             <LandingContainer />
             <ServicioSection />
             <ClasesSection />

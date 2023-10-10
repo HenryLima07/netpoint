@@ -21,7 +21,7 @@ const ClasesSection = ()=>{
                         title={"Clases para jóvenes y niños"}
                         subtitle={"De 10 a 14 años"}
                         extraInfo={"Horarios de 10:00 am a 4:00 pm"}
-                        btnClass={"shadow-neon-sky border border-black"}
+                        btnClass={"border border-black shadow-rounded-button-sky"}
                         divClass={"items-start"}
                         textClass={"text-left"}
                         className = {"w-full md:w-[42%] lg:w-[45%]"}
@@ -35,7 +35,7 @@ const ClasesSection = ()=>{
                         title={"Clases Individuales"}
                         subtitle={"Matutinas y vespertinas"}
                         extraInfo={"Todos los niveles"}
-                        btnClass={"shadow-lime-yellow border border-black"}
+                        btnClass={"border border-black shadow-rounded-button-lime"}
                         divClass={"md:items-end"}
                         textClass={"md:text-right"}
                         className={""}
@@ -52,7 +52,7 @@ const ClasesSection = ()=>{
                         title={"Clases grupales"}
                         subtitle={"Niños, jóvenes y adultos"}
                         extraInfo={"DIsponibles clases sabatinas"}
-                        btnClass={"shadow-black border border-black"}
+                        btnClass={"shadow-rounded-button-sky shadow-black border border-black"}
                         divClass={"items-start"}
                         textClass={"text-left"}
                         className={""}

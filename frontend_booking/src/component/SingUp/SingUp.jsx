@@ -108,7 +108,6 @@ const SingUp =({})=>{
                       innerRef={{ ...register("date", { required: true }) }}
                       validation={errors.date}
                       placeholder={""}
-                      icon={<CalendarMonthIcon style={{fontSize: "24px"}}/>}
                       type={"date"}
                       className={"flex-row-reverse"}
                     />
