@@ -1,0 +1,77 @@
+/*my selection #26649B closed red classes yellow and others selection green */
+
+/* Custom CSS to hide next and prev buttons */
+.custom-calendar > .rbc-toolbar > .rbc-btn-group > button {
+    display: none !important;
+  }
+  .rbc-row{
+    display: none;
+  }
+
+/* Custom styles for the calendar container */
+.custom-calendar-container {
+
+  }
+  
+  /*rows of content*/
+  .rbc-timeslot-group{
+    border: 1px solid #2E3646;
+  }
+  /*Hour cell*/
+  .rbc-timeslot-group{
+    background-color: white;
+    border: 1px solid #2e3646;
+  }
+
+  /*subtitle*/
+  .rbc-time-header {
+    background-color: white;
+  }
+  /*Header content */
+  .rbc-row-content::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: "Actividades";
+    font-size: large;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  /* Style for selected slots */
+  .rbc-slot-selecting {
+    background-color: #f0f0f0; /* Background color of the selected slot */
+  }
+  
+  /* Style for selected events */
+  .rbc-event {
+    background-color: #26649B; /* Background color of events */
+    color: #fff; /* Text color of events */
+    border: 1px solid #007bff; /* Border color of events */
+  }
+  
+  /* Style for event titles */
+  .rbc-event-content {
+    font-weight: bold; /* Make event titles bold */
+    font-size: 14px; /* Adjust the font size of event titles */
+  }
+  
+  /* Style for date and time labels */
+  .rbc-time-header-content {
+    font-weight: bold; /* Make date and time labels bold */
+    font-size: 16px; /* Adjust the font size of date and time labels */
+  }
+  
+  /* Style for the header with month and year */
+  .rbc-toolbar-label {
+    font-size: 22px; /* Adjust the font size of the month and year header */
+    font-weight: bold; /* Make the header text bold */
+    margin: 0.75rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Style for the selected date in the month view */
+  .rbc-month-view .rbc-selected {
+    background-color: #007bff; /* Background color of the selected date */
+    color: #fff; /* Text color of the selected date */
+  }
