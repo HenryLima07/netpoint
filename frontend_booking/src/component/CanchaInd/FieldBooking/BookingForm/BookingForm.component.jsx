@@ -53,7 +53,7 @@ const BookingForm = ({...props})=>{
     }
     return(
         <div className="w-full font-inter">
-            <h3 className="font-bebas text-6xl">Reserva ahora</h3>
+            <h3 className="font-bebas text-4xl md:text-6xl">Reserva ahora</h3>
             <Form className={"flex flex-col items-start"} onSubmit = {handleSubmit(onSuccess, onFail)}>
                 <div className="w-[95%] flex flex-col items-start gap-4">
                     <label htmlFor="bookingType" className="font-semibold lg:text-2xl">Tipo de reserva</label>
@@ -89,7 +89,7 @@ const BookingForm = ({...props})=>{
                       {
                         selectedDate ?
                             <BorderButton onClick={(e)=>{e.preventDefault(); props.ToggleModalHandler(true)}} className=" flex flex-row self-end items-center justify-around gap-6 font-bold text-black bg-pure-white shadow-rounded-button-azure border border-black
-                                mt-2 py-1 px-2 text-sm
+                                mt-4 py-2 px-3 text-sm
                                 sm:p-2 sm:px-4
                                 md:px-5 md:py-3 md:text-base"> 
                                 <p className="uppercase">selecciona tus horas</p>
@@ -111,7 +111,7 @@ const BookingForm = ({...props})=>{
                 </div>
 
                 <BorderButton className=" flex flex-row self-center items-center justify-around gap-6 font-bold text-black bg-pure-white shadow-rounded-button-azure border border-black
-                    mt-2 py-1 px-2 text-sm
+                    mt-5 py-2 px-3 text-sm
                     sm:p-2 sm:px-4
                     md:text-base
                     lg:mt-8 lg:py-3 lg:px-8 lg:text-lg"> 
