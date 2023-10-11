@@ -23,7 +23,7 @@ const CanchaIndView = ()=>{
                 : <></>
             }
             <Header />
-            <div className="h-28"></div>
+            <div className="h-5 md:h-28"></div>
             <CanchaIndComponent ToggleModalHandler={ToggleModal}/>
             <Footer />
         </main>
