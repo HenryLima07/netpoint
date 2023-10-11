@@ -13,6 +13,7 @@ export default {
         "rounded-button-sky-no-border": "7px 7px 0px 0px #229CFF",
         "rounded-button-lime": "7px 7px 0px 0px #CBF51A, 7px 7px 0px 1px #000000",
         "rounded-button-lime-no-border": "7px 7px 0px 0px #CBF51A",
+        "rounded-button-azure": "7px 7px 0px 0px #638FF5, 7px 7px 0px 1px #000000",
         "rounded-courts-location": "17px 17px 0px -3px #000000",
       }
     },
