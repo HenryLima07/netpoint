@@ -3,6 +3,9 @@ package hl.booking_app.booking.dto.request;
 import lombok.Data;
 
 import javax.persistence.Column;
+
+import hl.booking_app.booking.utils.DateDeserealizer;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -19,8 +22,10 @@ public class PaqueteRequest {
 
     private BigInteger paqCantidad;
 
+    @JsonDeserialize(using = DateDeserealizer.class)
     private Date paqFechaDesde;
 
+    @JsonDeserialize(using = DateDeserealizer.class)
     private Date paqFechaHasta;
 
     private String paqLinkPago;

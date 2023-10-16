@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.util.Date;
 
+import hl.booking_app.booking.utils.DateDeserealizer;
+
 @Data
 public class PersonaRequest {
 
@@ -11,6 +13,7 @@ public class PersonaRequest {
 
     private String perApellidos;
 
+    @JsonDeserialize(using = DateDeserealizer.class)
     private Date perFechaNac;
 
     private String perEstado = "ACT";

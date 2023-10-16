@@ -5,10 +5,14 @@ import lombok.Data;
 import java.math.BigInteger;
 import java.util.Date;
 
+import hl.booking_app.booking.utils.DateDeserealizer;
+
 @Data
 public class AlumnoRequest {
 
     private Integer id;
+    
+    @JsonDeserialize(using = DateDeserealizer.class)
     private Date almFechaInicio;
     private Integer almNivel;
     private Integer almDiaPago;
