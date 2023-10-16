@@ -77,6 +77,7 @@ public class WebSecurityConfig {
                         .antMatchers("api/paquete/adm/**").hasAuthority(rol.getAdmin())
                         .antMatchers("api/paquete/**").permitAll()
                         .antMatchers("api//reserva/own").hasAuthority(rol.getUser())
+                        .antMatchers("api//reserva/**").permitAll()
                         .antMatchers("api/paqueteComprado/own").hasAuthority(rol.getUser())
                         .antMatchers("api/alumno/adm").hasAuthority(rol.getAdmin())
                         .antMatchers("api/horario/cancha/adm/**").hasAuthority(rol.getAdmin())
