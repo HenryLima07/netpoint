@@ -9,6 +9,7 @@ import hl.booking_app.booking.utils.DozerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,5 +33,15 @@ public class ReservaCanchaServiceImpl implements ReservaCanchaService {
     @Override
     public List<ReservaCanchaDto> getAllReservasByPersonaAndEstado(Integer id, String estado) {
         return mapper.maplist(reservasCanchaRepository.findAllByRscEstadoAndPersonaId(estado, id), ReservaCanchaDto.class);
+    }
+
+    @Override
+    public List<ReservaCanchaDto> getAllReservasByFechaReserva(Date fecha){
+        return mapper.maplist(reservasCanchaRepository.findAllByRscFechaReserva(fecha), ReservaCanchaDto.class);
+    }
+
+    @Override
+    public List<ReservaCanchaDto> getAll() {
+        return mapper.maplist(reservasCanchaRepository.findAll(), ReservaCanchaDto.class);
     }
 }

@@ -59,8 +59,8 @@ public class UserReservaCanchaController {
 
 
             //creating reserva cancha
+            System.out.println(req.getRscFechaReserva());
             NpoReservasCancha _rc = mapper.map(req, NpoReservasCancha.class);
-//            _rc.setId(2);
             _rc.setRscFecha(Instant.now());
             _rc.setCancha(cancha);
             _rc.setPersona(persona);
