@@ -14,4 +14,8 @@ public interface CanchasService {
     public List<CanchaDto> getAllCanchas();
     public NpoCancha getById(Integer id);
     public CanchaDto getCanchaById(Integer id);
+
+    public List<CanchaDto> getAllCanchaByEstado(String estado);
+
+
 }

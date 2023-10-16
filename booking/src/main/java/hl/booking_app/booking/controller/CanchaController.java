@@ -6,6 +6,7 @@ import hl.booking_app.booking.entities.NpoCancha;
 import hl.booking_app.booking.service.CanchasService;
 import hl.booking_app.booking.utils.Responses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +29,10 @@ public class CanchaController {
     GeneralResponseDto generalResponseDto;
 
     @GetMapping
-    public ResponseEntity<GeneralResponseDto> getAllCanchas(){
+    public ResponseEntity<GeneralResponseDto> getAllCanchas(@Param("estado") String estado){
         try{
-            List<CanchaDto> response = canchasService.getAllCanchas();
+            System.out.println(estado);
+            List<CanchaDto> response = canchasService.getAllCanchaByEstado(estado);
             generalResponseDto.setMessage(responses.getSuccessfulMessage());
             generalResponseDto.setData(response);
             return ResponseEntity.ok(generalResponseDto);

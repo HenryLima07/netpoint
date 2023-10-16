@@ -1,6 +1,7 @@
 package hl.booking_app.booking.service.serviceImpl;
 
 import hl.booking_app.booking.dto.CanchaDto;
+import hl.booking_app.booking.dto.reservaCancha.ReservaCanchaDto;
 import hl.booking_app.booking.entities.NpoCancha;
 import hl.booking_app.booking.repository.CanchaRepository;
 import hl.booking_app.booking.service.CanchasService;
@@ -59,6 +60,12 @@ public class CanchaServiceImpl implements CanchasService {
         Optional<NpoCancha> canchaOptional = canchaRepository.findById(id);
         return canchaOptional.map(c -> mapper.map(c, CanchaDto.class)).orElse(null);
     }
+
+    @Override
+    public List<CanchaDto> getAllCanchaByEstado(String estado) {
+        return mapper.maplist(canchaRepository.findAllByCanEstado(estado), CanchaDto.class);
+    }
+
     @Override
     public NpoCancha getById(Integer id) {
         Optional<NpoCancha> canchaOptional = canchaRepository.findById(id);

@@ -1,5 +1,6 @@
 package hl.booking_app.booking.dto.request;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import java.math.BigInteger;
