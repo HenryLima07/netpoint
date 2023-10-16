@@ -12,7 +12,17 @@ const FieldBooking = ({...props})=>{
                 <h2 className="text-light-gray text-lg md:text-2xl ">Sede C.D Gambeta Proceres</h2>
                 <p className=" items-start text-light-gray my-4 text-sm md:text-xl">El tenis es un desafío constante que te hará superar tus límites. ¡Únete a Netpoint y acepta el desafío hoy!</p>
             </div>
-            <BookingForm ToggleModalHandler={props.ToggleModalHandler}/>
+            <BookingForm 
+                startTime={props.startTime} 
+                endTime={props.endTime} 
+                title={props.title} 
+                selectedDate={props.selectedDate} 
+                ToggleModalHandler={props.ToggleModalHandler} 
+                dateHandler={props.dateHandler} 
+                titleHandler={props.titleHandler} 
+                setEventsHandler={props.setEventsHandler}
+                clearSelectedTimeHandler={props.clearSelectedTimeHandler}
+                />
         </section>
     );
 }

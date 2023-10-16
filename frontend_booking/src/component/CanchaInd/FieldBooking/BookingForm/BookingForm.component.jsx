@@ -2,6 +2,7 @@ import Form from "../../../Form/Form";
 import ErrorMessage from "../../../Form/ErrorMessage/ErrorMessage";
 import InputForm from "../../../Form/InputForm/InputForm";
 import BorderButton from "../../../Buttons/BorderButton/BorderButton";
+import NoBorderButton from "../../../Buttons/NoBorderButton/NoBorderButton";
 import TextAreaForm from "../../../Form/TextAreaForm/TextAreaForm.component";
 import SelectForm from "../../../Form/SelectForm/SelectForm.component";
 
@@ -11,46 +12,85 @@ import { useForm } from "react-hook-form";
 import { UseAuthContext } from "../../../../context/authContext";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import moment from 'moment';
+import moment from "moment";
 
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
+import { actualDate } from "../../../../utils/utils";
+import { BookingFormService } from "../../CanchaInd.service";
 
 const BookingForm = ({...props})=>{
-    const { user } = UseAuthContext();
+    const { user, token } = UseAuthContext();
+    const { CreateBooking, SelectAllBookingsOnDate, BookingDateToEventsDateMapping } = BookingFormService();
 
-    const [ selectedDate, setSelectedDate ] = useState("");
+    //props element comes from cancha view
+    const { startTime, endTime, title, titleHandler, selectedDate, dateHandler, setEventsHandler, clearSelectedTimeHandler } = props;
 
     const selectedDateHandler = (e)=>{
-        e.target.value >= actualDate() ? setSelectedDate(e.target.value) : setSelectedDate("")
+        e.target.value >= actualDate() ? dateHandler(e.target.value) : dateHandler("")
     }
 
     const {
         register, 
         formState: { errors },
         handleSubmit,
+        reset,
     } = useForm();
 
+    const onSelectTimeButton = async(e)=>{
+
+        e.preventDefault(); 
+        if(!title) {
+            toast.warn("Seleccione el tipo de reserva", {toastId: "warn"});
+            return;
+        }
+        if(!selectedDate) return;
+        
+        const data = await SelectAllBookingsOnDate(selectedDate);
+        if(data) setEventsHandler(BookingDateToEventsDateMapping(data.data));
+        
+        props.ToggleModalHandler(true);
+    }
 
     const onSuccess = async(data)=>{
         if(!data || !startTime || !endTime){
-            onFail()
+            toast.warn("Selecciona tus horarios primero", {
+                toastId: "warning"
+            });
             return;
         }
-       console.log(data);
+       
+        if(!user || !token) {
+            toast.warn("Se necesita iniciar sesión primero", {
+                toastId: "warning"
+            });
+            
+        }
 
+        // get forms data
+        const { bookingType, date, comment } = data;
+
+        //data quemada por no saber si existe o no la informacion
+        let estado = "ACT";
+        let rscTipoDePago = null;
+        let canchaId = 1;
+        const response = await CreateBooking(token, bookingType, new Date(date).toISOString(), startTime, endTime, comment,  rscTipoDePago, canchaId, estado);
+        toast.success(response.message, { toastId: "success" });
+
+        dateHandler("");
+        clearSelectedTimeHandler();
+        reset();
     }
-    const onFail = ()=>{
+
+    const onFail = ()=>{        
         toast.warn("Revisa bien tus datos e intenta de nuevo", {
             toastId: "warning"
         });
     }
 
-    const actualDate = ()=>{
-        return moment().format("YYYY-MM-DD");
-    }
+    
     return(
         <div className="w-full font-inter">
             <h3 className="font-bebas text-4xl md:text-6xl">Reserva ahora</h3>
@@ -61,9 +101,12 @@ const BookingForm = ({...props})=>{
                         id={"bookingType"}
                         name={"bookingType"}
                         aria-invalid={errors.bookingType ? "true" : "false"}
-                        innerRef={{...register("bookingType", { required: true})}}
+                        innerRef={{...register("bookingType", { required: true, onChange: (e)=>{
+                            let index = e.nativeEvent.target.selectedIndex;
+                            let title = e.nativeEvent.target[index].text;
+                            titleHandler(title);
+                        }})}}
                         validation={errors.bookingType}
-                        placeholder={""}
                         className={"flex-row-reverse"}
                         icon={<CheckCircleOutlineIcon />}
                     >
@@ -86,15 +129,26 @@ const BookingForm = ({...props})=>{
                     />
                       {errors.date?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
                       {errors.date?.type === "notDate" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.notDate} </ErrorMessage>)}
+                      
+                      {/* selected hours display */}
+                      {
+                        startTime && endTime ? 
+                            <p>Horas seleccionadas: <span className="font-medium"> {startTime} - {endTime}  </span></p>
+                            :
+                            <></>
+                      }
                       {
                         selectedDate ?
-                            <BorderButton onClick={(e)=>{e.preventDefault(); props.ToggleModalHandler(true)}} className=" flex flex-row self-end items-center justify-around gap-6 font-bold text-black bg-pure-white shadow-rounded-button-azure border border-black
-                                mt-4 py-2 px-3 text-sm
-                                sm:p-2 sm:px-4
-                                md:px-5 md:py-3 md:text-base"> 
-                                <p className="uppercase">selecciona tus horas</p>
+                            <NoBorderButton handleClick={(e)=>onSelectTimeButton(e)} className={`font-bebas flex flex-row self-end items-center gap-6 justify-around bg-dark-gray text-pure-white
+                                  py-2 px-3 text-base
+                                  sm:p-2 sm:px-4
+                                  md:px-5 md:py-3 md:text-lg
+                                 `}>   
+                                
+                                <p className="uppercase">Reservar ahora</p>
                                 <EmojiPeopleIcon />
-                            </BorderButton>
+
+                            </NoBorderButton>
                             :
                             <></>
                       }
