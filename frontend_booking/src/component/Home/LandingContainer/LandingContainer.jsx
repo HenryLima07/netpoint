@@ -20,7 +20,7 @@ const LandingText = () => {
             <p className="font-medium
                 text-[0.75rem] sm:text-xl md:text-2xl lg:text-3xl">Haz ya tu reserva</p>
             
-            <BorderButton className=" flex flex-row items-center justify-around gap-6 font-bold text-black bg-pure-white shadow-rounded-button-yellow
+            <BorderButton className=" flex flex-row items-center justify-around gap-6 font-bold border border-black text-black bg-pure-white shadow-rounded-button-yellow
                 mt-2 py-1 px-2 text-[0.6rem]
                 sm:text-sm sm:p-2 sm:px-4
                 md:text-md
