@@ -16,6 +16,10 @@ export const StringToTime12Hours = (date) =>{
 
 };
 
+export const ISOtoOnlyDate = (date)=>{
+    return moment(date).format("yyyy-MM-DD");
+}
+
 //return constructed time
 export const FechaHoraMappingForCalendar = (date, time)=>{
     if(!date || !time ) return null;

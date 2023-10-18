@@ -6,7 +6,7 @@ import { ArrowLeft } from "react-bootstrap-icons";
 
 const LoginView= ()=>{
     return(
-        <main className="h-screen font-inter flex items-center justify-center relative bg-[url('./img/formback.jpg')] bg-no-repeat bg-center bg-cover">
+        <main className="h-screen font-inter flex items-center justify-center relative bg-[url('./img/formback.jpg')] bg-no-repeat bg-center bg-cover max-w-[1920px]">
             <div className="absolute w-full h-full top-0 left-0 bg-lapis-lazuli bg-opacity-20"></div>
 
 

@@ -7,7 +7,7 @@ import NotFound from "../assets/img/notfoundpic.png";
 const Error=()=>{
     const navigate = useNavigate();
     return (
-        <main className="flex items-center justify-center">
+        <main className="flex items-center justify-center max-w-[1920px]">
             <div className=" flex flex-col p-6 md:flex-row items-center gap-6 lg:gap-16">
                 <img src={NotFound} alt="Error image" className=" lg:w-full md:w-3/5"/>
                 <div className="flex flex-col font-inter w-full md:w-3/4">

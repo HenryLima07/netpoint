@@ -8,6 +8,7 @@ import aside from "../../../assets/img/aside.png";
 
 import CloseIcon from '@mui/icons-material/Close';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { HashLink } from "react-router-hash-link";
 
 
 const Hambuger = ({className, solid, setToogleAsideMenuHandler})=>{
@@ -25,8 +26,13 @@ const Hambuger = ({className, solid, setToogleAsideMenuHandler})=>{
     );
 }
 
-const MenuItem = ({to, text, icon})=>{
+const MenuItemLink = ({to, text, icon})=>{
     return <Link to={to} className="m-3 capitalize flex flex-row"> {icon} <li>{text}</li></Link>
+
+}
+
+const MenuItemHash = ({to, text, icon})=>{
+    return <HashLink smooth to={to} className="m-3 capitalize flex flex-row"> {icon} <li>{text}</li></HashLink>
 
 }
 
@@ -40,18 +46,19 @@ const Menu = ()=>{
                 user ? 
                 <>
                     <hr className="h-[1px] w-full bg-light-gray "/>
-                    <MenuItem to={"/"} text={"tu perfil"} />  
-                    <MenuItem to={"/"} text={"tu agenda"} />  
+                    <MenuItemLink to={"/"} text={"tu perfil"} />  
+                    <MenuItemLink to={"/"} text={"tu agenda"} />  
 
                 </>
                 :
                 <></>
             }
             <hr className="h-[1px] w-full bg-light-gray "/>
-            <MenuItem to={"/"} text={"inicio"} />
-            <MenuItem to={"/"} text={"canchas"} />
-            <MenuItem to={"/"} text={"promos"} />
-            <MenuItem to={"/"} text={"nosotros"} />
+            <MenuItemHash to={"/#home"} text={"inicio"} />
+            <MenuItemLink to={"/cancha"} text={"canchas"} />
+            <MenuItemHash to={"/#clases"} text={"clases"} />
+            <MenuItemHash to={"/#promos"} text={"promos"} />
+            <MenuItemLink to={"/"} text={"nosotros"} />
 
             {
                 user ? 
@@ -63,8 +70,8 @@ const Menu = ()=>{
                 :
                 <>
                     <hr className="h-[1px] w-full bg-light-gray "/>
-                    <MenuItem to={"/singin"} text={"iniciar sesión"} />
-                    <MenuItem to={"/singup"} text={"registrarse"} />  
+                    <MenuItemLink to={"/singin"} text={"iniciar sesión"} />
+                    <MenuItemLink to={"/singup"} text={"registrarse"} />  
                 </>
             }
         </ul>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { HashLink } from "react-router-hash-link";
 
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -41,10 +41,10 @@ const Footer = () => {
                 <div className="uppercase md:w-1/2 lg:w-1/2 ">
                     <h3 className="font-bebas tracking-wide text-2xl md:text-4xl py-2">Más información</h3>
                     <ul className="flex flex-col md:flex-row flex-wrap gap-4 text-sm sm:text-lg md:text-xl">
-                    <li><Link to={"/"}>Inicio</Link></li>
-                    <li><Link to={"/"}>Cancha</Link></li>
-                    <li><Link to={"/"}>Clases</Link></li>
-                    <li><Link to={"/"}>Promos</Link></li>
+                    <li><HashLink smooth to={"/#home"}>Inicio</HashLink></li>
+                    <li><Link to={"/cancha"}>Cancha</Link></li>
+                    <li><HashLink smooth to={"/#clases"}>Clases</HashLink></li>
+                    <li><HashLink smooth to={"/#promo"}>Promos</HashLink></li>
                     <li><Link to={"/"}>Reservar</Link></li>
                     <li><Link to={"/"}>Nosotros</Link></li>
                     <li><Link to={"/"}>Políticas de seguridad</Link></li>

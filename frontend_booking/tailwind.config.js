@@ -15,6 +15,7 @@ export default {
         "rounded-button-lime-no-border": "7px 7px 0px 0px #CBF51A",
         "rounded-button-azure": "7px 7px 0px 0px #638FF5, 7px 7px 0px 1px #000000",
         "rounded-courts-location": "17px 17px 0px -3px #000000",
+        "cards": "0px 5px 10px 1px #c8c8c8"
       }
     },
     colors: {
