@@ -10,7 +10,7 @@ const data = {
 const TitleDescription = ({data})=>{
     return (
         <div className="font-inter text-dark-gray">
-            <h1 className="font-bold text-4xl md:text-6xl">Cancha de Tennis</h1>
+            <h1 className="font-bold text-4xl md:text-6xl">Cancha de Tennis: {data.canNombre}</h1>
             {
                 data ? 
                 <> 
@@ -51,10 +51,10 @@ const BodyDescription =({data})=>{
     )
 }
 
-const FieldDescription = ()=>{
+const FieldDescription = ({...props})=>{
     return(
         <section className="flex flex-col gap-12 py-5">   
-            <TitleDescription data = {data}/>
+            <TitleDescription data = {props.data}/>
             <BodyDescription data={data} />
         </section>
     );
