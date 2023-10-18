@@ -4,7 +4,7 @@ import FieldBooking from "./FieldBooking/FieldBooking.component";
 const CanchaIndComponent = ({...props})=>{
     return(
         <section className="p-5 flex flex-col gap-12 sm:px-12 lg:px-5 xl:px-16 2xl:px-32">
-            <FieldDescription />
+            <FieldDescription data={props.data} />
             <FieldBooking 
                 startTime={props.startTime} 
                 endTime={props.endTime} 
@@ -14,7 +14,9 @@ const CanchaIndComponent = ({...props})=>{
                 titleHandler={props.titleHandler} 
                 dateHandler={props.dateHandler} 
                 setEventsHandler={props.setEventsHandler} 
-                clearSelectedTimeHandler={props.clearSelectedTimeHandler}/>
+                clearSelectedTimeHandler={props.clearSelectedTimeHandler}
+                data={props.data}
+                />
         </section>
     );
 }

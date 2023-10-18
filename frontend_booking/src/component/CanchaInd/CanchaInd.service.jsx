@@ -63,10 +63,26 @@ export const BookingFormService = () =>{
         });
 
     }
+
+    const FetchCourt = async(id)=>{
+        startLoading();
+        try{
+            const { data } = await axios.get(`/cancha/${id}`)
+            return data;
+        }
+        catch(e){
+            console.log(e.message());
+        }
+        finally{
+            stopLoading();
+        }
+        
+    }
         const crud ={
         CreateBooking,
         SelectAllBookingsOnDate,
-        BookingDateToEventsDateMapping
+        BookingDateToEventsDateMapping,
+        FetchCourt,
     }
 
     return crud;
