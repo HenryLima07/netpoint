@@ -72,60 +72,79 @@ const SingUp =({})=>{
         <section className="m-6 md:mx-8 lg:mx-10">
             <Form className={"flex flex-col items-start"} onSubmit = {handleSubmit(onSuccess, onFail)}>
                 <div className="w-[95%] flex flex-col items-start gap-3">
-                    <label htmlFor="name" className="font-semibold text-lg lg:text-2xl">Nombres</label>
-                    <InputForm
-                      id={"name"}
-                      name={"name"}
-                      aria-invalid={errors.name ? "true" : "false"}
-                      innerRef={{ ...register("name", { required: true, pattern: /^[A-Za-z\s]*$/ }) }}
-                      validation={errors.name}
-                      placeholder={"Jhon Player"}
-                      icon={<PermIdentityOutlinedIcon style={{fontSize: "24px"}} />}
-                      className={"flex-row-reverse"}
-                    />
-                      {errors.name?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
-                      {errors.name?.type === "pattern" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.onlyString} </ErrorMessage>)}
 
-                    <label htmlFor="lastname" className="font-semibold text-lg lg:text-2xl">Apellidos</label>
-                    <InputForm
-                      id={"lastname"}
-                      name={"lastname"}
-                      aria-invalid={errors.lastname ? "true" : "false"}
-                      innerRef={{ ...register("lastname", { required: true, pattern: /^[A-Za-z\s]*$/ }) }}
-                      validation={errors.lastname}
-                      placeholder={"Peters Holder"}
-                      icon={<PermIdentityOutlinedIcon style={{fontSize: "24px"}} />}
-                      className={"flex-row-reverse"}
-                    />
-                      {errors.lastname?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
-                      {errors.lastname?.type === "pattern" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.onlyString} </ErrorMessage>)}
+                    {/* same row inputs for name and lastname */}
+                    <div className="w-full flex flex-col md:flex-row gap-4 md:gap-8">
+                      <div className="flex flex-col gap-3 w-full">
+                        <label htmlFor="name" className="font-semibold text-lg lg:text-2xl">Nombres</label>
+                        <InputForm
+                          id={"name"}
+                          name={"name"}
+                          aria-invalid={errors.name ? "true" : "false"}
+                          innerRef={{ ...register("name", { required: true, pattern: /^[A-Za-z\s]*$/ }) }}
+                          validation={errors.name}
+                          placeholder={"Jhon Player"}
+                          icon={<PermIdentityOutlinedIcon style={{fontSize: "24px"}} />}
+                          className={"flex-row-reverse"}
+                        />
+                          {errors.name?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
+                          {errors.name?.type === "pattern" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.onlyString} </ErrorMessage>)}
+                      </div>
 
-                    <label htmlFor="date" className="font-semibold text-lg lg:text-2xl">Fecha de nacimiento</label>
-                    <InputForm
-                      id={"date"}
-                      name={"date"}
-                      aria-invalid={errors.date ? "true" : "false"}
-                      innerRef={{ ...register("date", { required: true }) }}
-                      validation={errors.date}
-                      placeholder={""}
-                      type={"date"}
-                      className={"flex-row-reverse"}
-                    />
-                      {errors.date?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
+                      <div className="w-full flex flex-col gap-3">
+                        <label htmlFor="lastname" className="font-semibold text-lg lg:text-2xl">Apellidos</label>
+                        <InputForm
+                          id={"lastname"}
+                          name={"lastname"}
+                          aria-invalid={errors.lastname ? "true" : "false"}
+                          innerRef={{ ...register("lastname", { required: true, pattern: /^[A-Za-z\s]*$/ }) }}
+                          validation={errors.lastname}
+                          placeholder={"Peters Holder"}
+                          icon={<PermIdentityOutlinedIcon style={{fontSize: "24px"}} />}
+                          className={"flex-row-reverse"}
+                        />
+                          {errors.lastname?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
+                          {errors.lastname?.type === "pattern" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.onlyString} </ErrorMessage>)}
+                      </div>
                       
-                    <label htmlFor="phone" className="font-semibold text-lg lg:text-2xl">Teléfono</label>
-                    <InputForm
-                      id={"phone"}
-                      name={"phone"}
-                      aria-invalid={errors.phone ? "true" : "false"}
-                      innerRef={{ ...register("phone", { required: true, pattern: /^[726][0-9]{7}$/ }) }}
-                      validation={errors.phone}
-                      placeholder={"7091 0612"}
-                      icon={<LocalPhoneIcon style={{fontSize: "24px"}} />}
-                      className={"flex-row-reverse"}
-                    />
-                    {errors.phone?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
-                    {errors.phone?.type === "pattern" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.phoneNumber} </ErrorMessage>)}
+                    </div>
+
+                    {/* same row inputs for date birth and phone number */}
+                    <div className="w-full flex flex-col md:flex-row gap-4 md:gap-8">
+                      <div className="flex flex-col gap-3 w-full">
+                        <label htmlFor="date" className="font-semibold text-lg lg:text-2xl">Fecha de nacimiento</label>
+                        <InputForm
+                          id={"date"}
+                          name={"date"}
+                          aria-invalid={errors.date ? "true" : "false"}
+                          innerRef={{ ...register("date", { required: true }) }}
+                          validation={errors.date}
+                          placeholder={""}
+                          type={"date"}
+                          className={"flex-row-reverse"}
+                        />
+                          {errors.date?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
+
+                      </div>
+
+                      <div className="w-full flex flex-col gap-3">
+                        <label htmlFor="phone" className="font-semibold text-lg lg:text-2xl">Teléfono</label>
+                        <InputForm
+                          id={"phone"}
+                          name={"phone"}
+                          aria-invalid={errors.phone ? "true" : "false"}
+                          innerRef={{ ...register("phone", { required: true, pattern: /^[726][0-9]{7}$/ }) }}
+                          validation={errors.phone}
+                          placeholder={"7091 0612"}
+                          icon={<LocalPhoneIcon style={{fontSize: "24px"}} />}
+                          className={"flex-row-reverse"}
+                        />
+                        {errors.phone?.type === "required" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.require} </ErrorMessage>)}
+                        {errors.phone?.type === "pattern" && (<ErrorMessage> <span className="font-medium">Nota: </span> {ErrorMessages.phoneNumber} </ErrorMessage>)}
+
+                      </div>
+                      
+                    </div>
 
                     <label htmlFor="email" className="font-semibold text-lg lg:text-2xl">Correo</label>
                     <InputForm

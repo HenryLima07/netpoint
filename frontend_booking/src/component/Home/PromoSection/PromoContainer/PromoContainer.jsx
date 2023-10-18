@@ -2,9 +2,9 @@ import BorderButton from '../../../Buttons/BorderButton/BorderButton';
 
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 
-const PromoContainer = ({className, price, name, onClick=()=>{}, children})=>{
+const PromoContainer = ({className, price, name, onClick=()=>{}, children, ...props})=>{
     return(
-        <article className={`flex flex-col items-center gap-4 border-2 p-4 md:p-8 m-4 border-black rounded-xl text-inter text-dark-gray ${className}`}>
+        <article className={`flex flex-col items-center gap-4 border-2 p-4 md:p-8 m-4 border-black rounded-xl text-inter text-dark-gray ${className}`} {...props}>
             <div className='flex flex-row items-end gap-1 font-bebas'>
                 <h2 className='text-3xl md:text-5xl'>${ price ? Number(price).toFixed(2).toString() : ""}</h2>
                 <h6 className="uppercase font-semibold text-xl md:text-2xl">usd</h6>

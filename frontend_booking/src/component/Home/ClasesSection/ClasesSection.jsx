@@ -8,7 +8,7 @@ import claseIndie from "../../../assets/img/clases-indie.png";
 const ClasesSection = ()=>{
     return (
         <section className="flex flex-col font-inter text-md md:text-xl text-dark-gray">
-            <h2 className=" font-bold text-3xl text-center md:text-5xl lg:mx-48 xl:mx-72 text-black pb-12">Agenda tu <span className=" text-neon-sky"> primera clase </span> y disfruta</h2>
+            <h2 className=" font-bold text-3xl text-center md:text-5xl lg:mx-48 xl:mx-72 text-black pb-12" id="clases">Agenda tu <span className=" text-neon-sky"> primera clase </span> y disfruta</h2>
             
             <article className="flex flex-col">
 

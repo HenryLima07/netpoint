@@ -1,13 +1,17 @@
 import NoBorderButton from "../../Buttons/NoBorderButton/NoBorderButton";
 import LinkContainer from "../LinkContainer/LinkContainer";
+import HashLinkContainer from "../LinkContainer/HashLink.container";
 
 import { UseAuthContext } from "../../../context/authContext";
 
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+
 
 import {ArrowRightShort} from "react-bootstrap-icons";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import profilepic from "../../../assets/img/profile.jpg"
+
 
 
 const NoUserButtons = ({solid = false})=>{
@@ -37,13 +41,13 @@ const MenuContainer = ({solid = false, ...props})=>{
     const { user } = UseAuthContext();
 
     return(
-        <article className="hidden md:flex flex-row w-full justify-around items-center w-full lg:w-4/5 xl:w-3/4">
+        <article className="hidden md:flex flex-row justify-around items-center w-full lg:w-4/5 xl:w-3/4">
 
             <ul className={`flex flex-row ${solid ? "text-dark-gray": "text-pure-white"}`}>
-                <LinkContainer to={"/"}>inicio</LinkContainer>
-                <LinkContainer to={"/"}>canchas</LinkContainer>
-                <LinkContainer to={"/"}>clases</LinkContainer>
-                <LinkContainer to={"/"}>promos</LinkContainer>
+                <HashLinkContainer to={"/#home"}>inicio</HashLinkContainer>
+                <LinkContainer to={"/cancha"}>canchas</LinkContainer>
+                <HashLinkContainer to={"/#clases"}>clases</HashLinkContainer>
+                <HashLinkContainer to={"/#promo"}>promos</HashLinkContainer>
                 <LinkContainer to={"/"}>reservar</LinkContainer>
                 <LinkContainer to={"/"}>nosotros</LinkContainer>
             </ul>

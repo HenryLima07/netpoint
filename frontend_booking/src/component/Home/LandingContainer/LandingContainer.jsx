@@ -1,5 +1,6 @@
 
 import BorderButton from "../../Buttons/BorderButton/BorderButton";
+import { Link } from "react-router-dom";
 
 import poster from "../../../assets/img/video-poster.png"
 import video from "../../../assets/video/landing-hero.mp4"
@@ -20,6 +21,7 @@ const LandingText = () => {
             <p className="font-medium
                 text-[0.75rem] sm:text-xl md:text-2xl lg:text-3xl">Haz ya tu reserva</p>
             
+            <Link to={"/cancha"}>
             <BorderButton className=" flex flex-row items-center justify-around gap-6 font-bold border border-black text-black bg-pure-white shadow-rounded-button-yellow
                 mt-2 py-1 px-2 text-[0.6rem]
                 sm:text-sm sm:p-2 sm:px-4
@@ -28,13 +30,14 @@ const LandingText = () => {
                 <p>Reservar ahora</p>
                 <EmojiPeopleIcon />
             </BorderButton>
+            </Link>
         </div>
     );
 }
 
 const LandingContainer = () => {
     return(
-        <section className="w-full h-[55vh] sm:h-[65vh] md:h-[80vh] lg:h-screen relative flex items-center justify-center">
+        <section className="w-full h-[55vh] sm:h-[65vh] md:h-[80vh] lg:h-screen relative flex items-center justify-center" id="home">
             <div className="relative overflow-hidden flex items-center justify-center h-full w-full"> 
                 <video muted playsInline loop poster={poster} autoPlay className="object-fill w-full absolute h-full top-0 left-0">
                     <source src={video} type="video/mp4"/>
