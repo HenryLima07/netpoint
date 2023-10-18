@@ -9,12 +9,27 @@ import PhraseSection from "../component/Home/PhraseSection/PhraseSection";
 
 import Loader from "../component/Loader/Loader";
 
-import { useState } from "react";
+import { HomeService } from "../component/Home/Home.service";
+
+import { useEffect, useState } from "react";
 
 
 const Home = () => {
-
     const [solid, isSolid] = useState(false);
+
+    //fetch promotions
+    const { fetchPromos } = HomeService();
+    const [ promoData, setPromoData ] = useState([]);
+    useEffect(() => {
+        fetchPromotionsHandler();
+    }, []);
+
+    const fetchPromotionsHandler = async()=>{
+        const { data } = await fetchPromos();
+        if(!data) return;
+
+        setPromoData(data);  
+    }
 
 
     //scrolling event 
@@ -25,17 +40,17 @@ const Home = () => {
 
     window.addEventListener("scroll", handleScroll);
     return(
-        <div className=" flex flex-col">
+        <main className=" flex flex-col max-w-[1920px]">
             <Loader />
             <Header solid={solid} />
             <LandingContainer />
             <ServicioSection />
             <ClasesSection />
             <CourtSection />
-            <PromoSection />
+            <PromoSection promoData = {promoData} />
             <PhraseSection />
             <Footer />
-        </div>
+        </main>
     );
 }
 
