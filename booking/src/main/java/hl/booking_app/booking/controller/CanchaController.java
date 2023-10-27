@@ -31,7 +31,6 @@ public class CanchaController {
     @GetMapping
     public ResponseEntity<GeneralResponseDto> getAllCanchas(@Param("estado") String estado){
         try{
-            System.out.println(estado);
             List<CanchaDto> response = canchasService.getAllCanchaByEstado(estado);
             generalResponseDto.setMessage(responses.getSuccessfulMessage());
             generalResponseDto.setData(response);

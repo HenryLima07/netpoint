@@ -15,6 +15,7 @@ public interface ReservaCanchaService {
     public List<ReservaCanchaDto> getAllReservasByPersona(Integer id);
     public List<ReservaCanchaDto> getAllReservasByPersonaAndEstado(Integer id, String estado);
 
-    public List<ReservaCanchaDto> getAllReservasByFechaReserva(Date fecha);
+    public List<ReservaCanchaDto> getAllReservasByFechaReserva(Integer canchaID,  Date fecha);
+//    public List<ReservaCanchaDto> getAllReservasByFechaReserva(Date fecha);
     public List<ReservaCanchaDto> getAll();
 }

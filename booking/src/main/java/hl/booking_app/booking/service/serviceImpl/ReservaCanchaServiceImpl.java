@@ -36,8 +36,10 @@ public class ReservaCanchaServiceImpl implements ReservaCanchaService {
     }
 
     @Override
-    public List<ReservaCanchaDto> getAllReservasByFechaReserva(Date fecha){
-        return mapper.maplist(reservasCanchaRepository.findAllByRscFechaReserva(fecha), ReservaCanchaDto.class);
+    public List<ReservaCanchaDto> getAllReservasByFechaReserva(Integer canchaID, Date fecha){
+//    public List<ReservaCanchaDto> getAllReservasByFechaReserva(Date fecha){
+        return mapper.maplist(reservasCanchaRepository.findAllByRscFechaReservaAndCanchaId(fecha, canchaID), ReservaCanchaDto.class);
+//        return mapper.maplist(reservasCanchaRepository.findAllByRscFechaReserva(fecha), ReservaCanchaDto.class);
     }
 
     @Override
