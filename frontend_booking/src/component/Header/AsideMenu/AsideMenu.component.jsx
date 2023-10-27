@@ -7,18 +7,24 @@ import usericon from "../../../assets/img/profile.jpg";
 import aside from "../../../assets/img/aside.png";
 
 import CloseIcon from '@mui/icons-material/Close';
-import LogoutIcon from '@mui/icons-material/Logout';
 import { HashLink } from "react-router-hash-link";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
-const Hambuger = ({className, solid, setToogleAsideMenuHandler})=>{
+
+const Hambuger = ({className, solid, setToogleAsideMenuHandler, shoppingCartHandler})=>{
     return (
-        <div id="hamburger" className={`z-10 md:hidden ${className}`}>
+        <div id="hamburger" className={`flex flex-row gap-2 z-10 md:hidden ${className}`}>
+
+            <div className="flex flex-row items-center justify-end w-full min-w-1/4 hover:cursor-pointer">
+                <button onClick={()=>shoppingCartHandler(true)} className="bg-pure-white px-2 py-[1px] border-2 border-black rounded-lg w-min"><ShoppingCartIcon style={{fontSize: "18px"}}/></button>
+            </div>
+
             <a className="flex flex-row w-full p-4 items-center">
                 <div className="space-y-1.5 cursor-pointer" onClick={()=> setToogleAsideMenuHandler(true)}>
-                    <span className={`block w-8 h-1 rounded-lg ${solid ? "bg-light-gray" : "bg-pure-white"}`}></span>
-                    <span className={`block w-8 h-1 rounded-lg ${solid ? "bg-light-gray" : "bg-pure-white"}`}></span>
-                    <span className={`block w-8 h-1 rounded-lg ${solid ? "bg-light-gray" : "bg-pure-white"}`}></span>
+                    <span className={`block w-8 h-1 rounded-lg ${solid ? "bg-black" : "bg-pure-white"}`}></span>
+                    <span className={`block w-8 h-1 rounded-lg ${solid ? "bg-black" : "bg-pure-white"}`}></span>
+                    <span className={`block w-8 h-1 rounded-lg ${solid ? "bg-black" : "bg-pure-white"}`}></span>
                 </div>
             </a>
         </div>
@@ -78,7 +84,7 @@ const Menu = ()=>{
     );
 }
 
-const AsideMenu=({className, solid = false})=>{
+const AsideMenu=({className, solid = false, shoppingCartHandler})=>{
 
     const { user } = UseAuthContext();
 
@@ -91,7 +97,7 @@ const AsideMenu=({className, solid = false})=>{
     return(
 
         <>
-        <Hambuger className = {className} solid={solid} setToogleAsideMenuHandler={setToogleAsideMenuHandler}/>
+        <Hambuger className = {className} solid={solid} setToogleAsideMenuHandler={setToogleAsideMenuHandler} shoppingCartHandler={shoppingCartHandler}/>
         {/* set class to toogle it */}
         <aside className={` font-inter text-dark-gray bg-pure-white h-full fixed flex flex-col rounded-bl-2xl rounded-tl-2xl p-6 pr-2 transition-all duration-300 w-80 -right-80 top-0 bottom-0 shadow-md shadow-black z-20 ${toogleAsideMenu ? "-translate-x-80": " invisible"}`}>
             <div className="flex flex-col mb-6">

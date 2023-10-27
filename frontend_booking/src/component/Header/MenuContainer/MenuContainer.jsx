@@ -31,7 +31,7 @@ const NoUserButtons = ({solid = false})=>{
 const UserButtons = ({...props})=>{
     return( 
         <div className="flex flex-row items-center justify-end gap-4 lg:gap-8 w-full min-w-1/4 hover:cursor-pointer">
-            <Link to={"/"} className="bg-pure-white px-2 py-1 border-2 border-black rounded-lg w-min"><ShoppingCartIcon style={{fontSize: "24px"}}/></Link>
+            <button onClick={()=>props.shoppingCartHandler(true)} className="bg-pure-white px-2 py-1 border-2 border-black rounded-lg w-min"><ShoppingCartIcon style={{fontSize: "24px"}}/></button>
             <div onClick={props.logoutEvent}><img src={profilepic} alt="user image profile" className="rounded-[50%] w-[45px] lg:w-[55px] min-w-[40px] lg:h-[55px] h-[45px] min-h-[40px] border-2 border-black"/></div>
         </div>
      );
