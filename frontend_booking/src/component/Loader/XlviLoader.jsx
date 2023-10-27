@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { useMediaQuery } from "react-responsive";
-// import "./xlviroundedloader.css";
+
+//using $on props elements to avoid DOM rendering problems on REACT
 
 const Anim = (animparams) => keyframes`
 0% {
@@ -69,9 +70,9 @@ const Anim = (animparams) => keyframes`
 `;
 
 const StyledContainer = styled.div`
-  background: ${(props) => props.background};
-  width: ${(props) => props.size_container}px;
-  height: ${(props) => props.size_container}px;
+  background: ${(props) => props.$background};
+  width: ${(props) => props.$sizecontainer}px;
+  height: ${(props) => props.$sizecontainer}px;
   padding: 20px;
 `;
 
@@ -79,20 +80,20 @@ const StyledBox = styled.div`
   box-sizing: border-box;
   position: absolute;
   display: block;
-  border-radius: ${(props) => props.size_border_radius}px;
-  border: ${(props) => props.size_border_thickness}px solid
-    ${(props) => props.border_color};
-  width: ${(props) => props.box_params.w}px;
-  height: ${(props) => props.box_params.h}px;
-  margin-top: ${(props) => props.box_params.mt}px;
-  margin-left: ${(props) => props.box_params.ml}px;
-  animation: ${(props) => Anim(props.animparams)} 3s 0s forwards
+  border-radius: ${(props) => props.$sizeborderradius}px;
+  border: ${(props) => props.$sizeborderthickness}px solid
+    ${(props) => props.$bordercolor};
+  width: ${(props) => props.$boxparams.w}px;
+  height: ${(props) => props.$boxparams.h}px;
+  margin-top: ${(props) => props.$boxparams.mt}px;
+  margin-left: ${(props) => props.$boxparams.ml}px;
+  animation: ${(props) => Anim(props.$animparams)} 3s 0s forwards
     cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 `;
 
 const XlviLoader = ({
   className = `xlviloader`,
-  backgound = `transparent`,
+  background = `transparent`,
   boxColors = [`#333`],
   size = `64px`,
   desktopSize = ``,
@@ -132,9 +133,9 @@ const XlviLoader = ({
   }
 
   let sizePassed = parseFloat(sizeFound);
-  let size_container = (sizePassed * 112) / 64;
-  let size_border_radius = (sizePassed * 24) / 64;
-  let size_border_thickness = (sizePassed * 16) / 64;
+  let sizecontainer = (sizePassed * 112) / 64;
+  let sizeborderradius = (sizePassed * 24) / 64;
+  let sizeborderthickness = (sizePassed * 16) / 64;
 
   let box1Params = {
     w: (sizePassed * 112) / 64,
@@ -280,32 +281,32 @@ const XlviLoader = ({
 
   return (
     <StyledContainer
-      size_container={size_container}
-      background={backgound}
+      $sizecontainer={sizecontainer}
+      $background={background}
       className={className}
     >
       <StyledBox
-        box_params={box1Params}
-        size_border_radius={size_border_radius}
-        size_border_thickness={size_border_thickness}
-        border_color={colorsToFill[0]}
-        animparams={anim1Params}
+        $boxparams={box1Params}
+        $sizeborderradius={sizeborderradius}
+        $sizeborderthickness={sizeborderthickness}
+        $bordercolor={colorsToFill[0]}
+        $animparams={anim1Params}
         className="box1"
       ></StyledBox>
       <StyledBox
-        box_params={box2Params}
-        size_border_radius={size_border_radius}
-        size_border_thickness={size_border_thickness}
-        border_color={colorsToFill[1]}
-        animparams={anim2Params}
+        $boxparams={box2Params}
+        $sizeborderradius={sizeborderradius}
+        $sizeborderthickness={sizeborderthickness}
+        $bordercolor={colorsToFill[1]}
+        $animparams={anim2Params}
         className="box2"
       ></StyledBox>
       <StyledBox
-        box_params={box3Params}
-        size_border_radius={size_border_radius}
-        size_border_thickness={size_border_thickness}
-        border_color={colorsToFill[2]}
-        animparams={anim3Params}
+        $boxparams={box3Params}
+        $sizeborderradius={sizeborderradius}
+        $sizeborderthickness={sizeborderthickness}
+        $bordercolor={colorsToFill[2]}
+        $animparams={anim3Params}
         className="box3"
       ></StyledBox>
     </StyledContainer>

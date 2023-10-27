@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import MenuContainer from "./MenuContainer/MenuContainer";
 import AsideMenu from "./AsideMenu/AsideMenu.component";
+import ShoppingCartComponent from "../ShoppingCart/ShoppingCart.component";
 
 import Logo from "../../assets/img/logo.png";
 
@@ -13,6 +14,13 @@ import { UseAuthContext } from "../../context/authContext";
 
 const Header = ({solid = true}) => {
     const { logout } = UseAuthContext();
+
+    //toggle shopping cart
+    const [ toggleShoppingCart, setToggleShoppingCart ] = useState(false);
+
+    const shoppingCartHandler  = (state) =>{
+        setToggleShoppingCart(state);
+    }
 
     return(
         <header className={`w-full max-w-[1920px] flex flex-row justify-between items-center font-bebas fixed top-0 z-10 ${solid ? "bg-pure-white" : ""}
@@ -29,9 +37,12 @@ const Header = ({solid = true}) => {
                 {/* (screenWidth.current > 758) ?  */}
                 <MenuContainer solid ={solid} 
                     logoutEvent = {logout} 
+                    shoppingCartHandler = {shoppingCartHandler}
                 />
                 
-                <AsideMenu solid={solid} />
+                <AsideMenu solid={solid} shoppingCartHandler={shoppingCartHandler} />
+
+                <ShoppingCartComponent toggleShoppingCart={toggleShoppingCart} shoppingCartHandler={shoppingCartHandler}/>
             
         </header>
     );
