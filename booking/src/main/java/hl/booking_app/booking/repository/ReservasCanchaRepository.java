@@ -15,5 +15,6 @@ public interface ReservasCanchaRepository extends JpaRepository<NpoReservasCanch
      @Query(value = "select reserva from NpoReservasCancha reserva where reserva.persona.id =:id and reserva.rscEstado =:rscEstado")
      public List<NpoReservasCancha> findAllByRscEstadoAndPersonaId(String rscEstado, Integer id);
 
-     public List<NpoReservasCancha> findAllByRscFechaReserva(Date rscFechaReserva);
+     public List<NpoReservasCancha> findAllByRscFechaReservaAndCanchaId(Date rscFechaReserva, Integer cancha_id);
+//     public List<NpoReservasCancha> findAllByRscFechaReserva(Date rscFechaReserva);
 }
