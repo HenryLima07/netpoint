@@ -54,7 +54,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -105,21 +107,22 @@ th {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #839E9F;
+  background-color: #839e9f;
   border-radius: 1.25rem;
   border: 0.1875rem solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #ACD8CE;
+  background-color: #acd8ce;
 }
 
 /*input reset*/
-input, input:focus {
-  border:none;
-  background-image:none;
-  background-color:transparent;
+input,
+input:focus {
+  border: none;
+  background-image: none;
+  background-color: transparent;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -127,7 +130,8 @@ input, input:focus {
 }
 
 /*textarea reset*/
-textarea, select {
+textarea,
+select {
   border: none;
   overflow: auto;
   outline: none;
@@ -137,19 +141,17 @@ textarea, select {
   box-shadow: none;
 
   resize: none; /*remove the resize handle on the bottom right*/
-  
-  background-image:none;
-  background-color:transparent;
-}
 
+  background-image: none;
+  background-color: transparent;
+}
 
 /*Fonts:*/
 @font-face {
   font-family: "Nunito";
-  src: 
-    url("./assets/fonts/Nunito/Nunito-VariableFont_wght.ttf"),
+  src: url("./assets/fonts/Nunito/Nunito-VariableFont_wght.ttf"),
     url("./assets/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf");
-  }
+}
 
 @font-face {
   font-family: "Bebas Neue";
