@@ -8,20 +8,20 @@ import SingUpView from "./view/SingUpView";
 import CanchaIndView from "./view/CanchaInd.view";
 import CanchaView from "./view/Canchas.view";
 import ErrorView from "./view/Error.view";
+import UserProfileView from "./view/UserProfile.view";
 
 function App() {
   return (
     <Routes>
-
-      <Route path="/" element={<Home/>}/>
-      <Route path="/singin" element={<LoginView/>}/>
-      <Route path="/singup" element={<SingUpView/>}/>
-      <Route path="/cancha/:id" element={<CanchaIndView/>}/>
-      <Route path="/cancha/*" element={<CanchaView/>}/>
-      <Route path="/*" element={<ErrorView/>}/>
-
+      <Route path="/" element={<Home />} />
+      <Route path="/singin" element={<LoginView />} />
+      <Route path="/singup" element={<SingUpView />} />
+      <Route path="/user" element={<UserProfileView />} />
+      <Route path="/cancha/:id" element={<CanchaIndView />} />
+      <Route path="/cancha/*" element={<CanchaView />} />
+      <Route path="/*" element={<ErrorView />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

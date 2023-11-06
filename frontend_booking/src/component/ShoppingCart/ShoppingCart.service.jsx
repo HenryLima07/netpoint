@@ -1,6 +1,7 @@
 const KEY = "shoppingNTPOINT";
 export const ShoppingCartService = () => {
   //public handlers ls
+
   const addElement = (data) => {
     let elements = getShoppingCart();
 
@@ -16,8 +17,7 @@ export const ShoppingCartService = () => {
     let elements = getShoppingCart();
     if (elements == null || elements.length < 0) return;
 
-    elements = elements.filter((e, index) => index != id);
-
+    elements = elements.filter((e) => e._id != id);
     clearShoppingCart();
 
     setShoppingCart(elements);

@@ -25,7 +25,7 @@ export const BookingFormService = () => {
   ) => {
     startLoading();
     try {
-      const { data } = await axios.post(
+      const data = await axios.post(
         "/reserva/own",
         {
           rscTipoReserva,
@@ -45,8 +45,14 @@ export const BookingFormService = () => {
       );
       return data;
     } catch (e) {
-      console.log(e.message);
-      toast.warn("No se ha podido reservar correctamente", { toastId: "warn" });
+      console.log(e.response.data.message);
+      const errors = {
+        400: "No se ha podido reservar correctamente",
+        404: "No se ha encontrado la cancha que desea reservar",
+        422: "Horarios duplicados, ya han sido reservados",
+      };
+      toast.warn(errors[e.response.status], { toastId: "warn" });
+      return e.response.status;
     } finally {
       stopLoading();
     }

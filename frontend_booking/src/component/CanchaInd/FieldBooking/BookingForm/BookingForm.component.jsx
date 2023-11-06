@@ -18,17 +18,18 @@ import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-import { actualDate } from "../../../../utils/utils";
+import { OverlapsAndDayHandler, actualDate } from "../../../../utils/utils";
 import { BookingFormService } from "../../CanchaInd.service";
 import { ShoppingCartService } from "../../../ShoppingCart/ShoppingCart.service";
 import { useParams } from "react-router-dom";
 
 const BookingForm = ({ ...props }) => {
+  //avoid overlapping elements on cart
+  const [overlaps, setOverlaps] = useState(false);
   const { user, token } = UseAuthContext();
-  const { addElement } = ShoppingCartService();
+  const { addElement, getElements } = ShoppingCartService();
   const { id } = useParams();
 
-  console.log(id);
   const {
     CreateBooking,
     SelectAllBookingsOnDate,
@@ -46,7 +47,6 @@ const BookingForm = ({ ...props }) => {
     dateHandler,
     setEventsHandler,
     clearSelectedTimeHandler,
-    canchaId,
   } = props;
 
   const selectedDateHandler = (e) => {
@@ -68,7 +68,7 @@ const BookingForm = ({ ...props }) => {
     }
     if (!selectedDate) return;
 
-    const data = await SelectAllBookingsOnDate(selectedDate, canchaId);
+    const data = await SelectAllBookingsOnDate(selectedDate, id);
     if (data) setEventsHandler(BookingDateToEventsDateMapping(data.data));
 
     props.ToggleModalHandler(true);
@@ -86,17 +86,36 @@ const BookingForm = ({ ...props }) => {
       toast.warn("Se necesita iniciar sesión primero", {
         toastId: "warning",
       });
+      return;
     }
 
     // get forms data
     const { bookingType, date, comment } = data;
 
     //data quemada por no saber si existe o no la informacion
-    let estado = "ACT";
-    let rscTipoDePago = null;
-    let canchaId = 1;
+    const estado = "ACT";
+    const rscTipoDePago = null;
+    const _id = crypto.randomUUID();
 
-    const cancha = await FetchCourt(canchaId);
+    //verify overlapping
+    let _overlaps = false;
+    const eventsCart = getElements();
+    if (eventsCart) {
+      _overlaps = OverlapsAndDayHandler(date, startTime, endTime, eventsCart);
+    }
+
+    if (_overlaps) {
+      setOverlaps(true);
+      toast.warn("Horarios ya guardados!", {
+        toastId: "warn",
+      });
+      return;
+    } else {
+      setOverlaps(false);
+    }
+
+    //fetch cancha to save it on petition
+    const cancha = await FetchCourt(id);
 
     if (!data) {
       toast.warn("Algo salió mal!", {
@@ -104,15 +123,17 @@ const BookingForm = ({ ...props }) => {
       });
       return;
     }
+
     //saving in localstorage
     addElement({
+      _id: _id,
       bookingType: bookingType,
       date: new Date(date).toISOString(),
       startTime: startTime,
       endTime: endTime,
       comment: comment,
       rscTipoDePago: rscTipoDePago,
-      canchaId: canchaId,
+      canchaId: id,
       estado: estado,
       canNombre: cancha.data.canNombre,
       canDireccion: cancha.data.canDireccion,
@@ -122,7 +143,7 @@ const BookingForm = ({ ...props }) => {
       toastId: "success",
     });
 
-    dateHandler("");
+    dateHandler(null);
     clearSelectedTimeHandler();
     reset();
   };
@@ -258,6 +279,16 @@ const BookingForm = ({ ...props }) => {
           <p className="uppercase">Agregar al carrito</p>
           <EmojiPeopleIcon />
         </BorderButton>
+        {overlaps ? (
+          <div className="self-center mt-3 md:mt-4">
+            <ErrorMessage>
+              <span className="font-medium">Nota: </span> horas ya guardadas en
+              el carrito de compras
+            </ErrorMessage>
+          </div>
+        ) : (
+          <></>
+        )}
       </Form>
     </div>
   );

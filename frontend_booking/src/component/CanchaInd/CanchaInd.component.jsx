@@ -10,7 +10,6 @@ const CanchaIndComponent = ({ ...props }) => {
         endTime={props.endTime}
         title={props.title}
         selectedDate={props.selectedDate}
-        canchaId={props.canchaId}
         ToggleModalHandler={props.ToggleModalHandler}
         titleHandler={props.titleHandler}
         dateHandler={props.dateHandler}

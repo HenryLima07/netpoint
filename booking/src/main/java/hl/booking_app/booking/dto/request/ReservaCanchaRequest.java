@@ -5,6 +5,7 @@ import hl.booking_app.booking.entities.NpoCancha;
 import hl.booking_app.booking.entities.NpoPersona;
 import hl.booking_app.booking.utils.DateDeserealizer;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.Instant;
 import java.util.Date;

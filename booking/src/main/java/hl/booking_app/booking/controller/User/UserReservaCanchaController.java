@@ -19,8 +19,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -47,19 +51,40 @@ public class UserReservaCanchaController {
     @PostMapping
     public ResponseEntity<GeneralResponseDto> createReserva(@RequestBody ReservaCanchaRequest req){
         try {
+            System.out.println(req.getRscComentarios() + " executed at " + (new Date()));
+            System.out.println(req.getRscFechaReserva());
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            List<ReservaCanchaDto> DailyReservas = reservaCanchaService.getAllReservasByFechaReserva(req.getCanchaId(), req.getRscFechaReserva());
+            boolean overlaps = false;
+
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            Date startTimeReq = timeFormat.parse(req.getRscHoraDesde());
+            Date endTimeReq = timeFormat.parse(req.getRscHoraHasta());
+            for(ReservaCanchaDto reserva : DailyReservas){
+               Date _start = timeFormat.parse(reserva.getRscHoraDesde());
+               Date _end = timeFormat.parse(reserva.getRscHoraHasta());
+                System.out.println("static hour start: " + startTimeReq);
+                System.out.println("static hour end " + endTimeReq);
+                System.out.println("start " + _start);
+                System.out.println("end "  +_end);
+
+               if((startTimeReq.equals(_start)) || (endTimeReq.equals(_end)) || (startTimeReq.before(_start) && endTimeReq.after(_end)) || (startTimeReq.after(_start) && endTimeReq.before(_end) || (endTimeReq.after(_start) && endTimeReq.before(_end)) || (startTimeReq.after(_start) && startTimeReq.before(_end)))){
+                   overlaps = true;
+                   break;
+               }
+            }
+            System.out.println("last petition has overlaps: " + overlaps);
+
+            if(overlaps){
+                return new ResponseEntity<GeneralResponseDto>(generalResponseDto, HttpStatus.UNPROCESSABLE_ENTITY);
+            }
             NpoPersona persona = personaService.getPersonaByEmail(user.getUsername());
             NpoCancha cancha = canchasService.getById(req.getCanchaId());
-
             if(cancha == null || persona == null){
-                generalResponseDto.setMessage("Cancha o usuario no encontrado");
-                generalResponseDto.setData(responses.getNotFoundError());
                 return new ResponseEntity<GeneralResponseDto>(generalResponseDto, HttpStatus.NOT_FOUND);
             }
 
-
             //creating reserva cancha
-            System.out.println(req.getRscFechaReserva());
             NpoReservasCancha _rc = mapper.map(req, NpoReservasCancha.class);
             _rc.setRscFecha(Instant.now());
             _rc.setCancha(cancha);
@@ -69,9 +94,18 @@ public class UserReservaCanchaController {
             generalResponseDto.setData(response);
             return ResponseEntity.ok(generalResponseDto);
         }
+        catch (HttpClientErrorException.NotFound e){
+            generalResponseDto.setMessage("Cancha o usuario no encontrado");
+            generalResponseDto.setData(responses.getNotFoundError());
+            return new ResponseEntity<GeneralResponseDto>(generalResponseDto, HttpStatus.NOT_FOUND);
+        }
+        catch (HttpClientErrorException.UnprocessableEntity e){
+            generalResponseDto.setMessage("Sus horarios ya han sido reservados");
+            generalResponseDto.setData(req);
+            return new ResponseEntity<GeneralResponseDto>(generalResponseDto, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         catch (Exception e){
             generalResponseDto.setMessage(responses.getErrorMessage());
-            generalResponseDto.setData(e.getMessage());
             return new ResponseEntity<GeneralResponseDto>(generalResponseDto, HttpStatus.BAD_REQUEST);
         }
     }

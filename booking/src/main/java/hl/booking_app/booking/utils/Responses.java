@@ -13,4 +13,5 @@ public class Responses {
     private final String notFoundError = "Element not found";
     private final String errorMessage = "An error occurred";
     private final String loginSuccessful = "Login successfully";
+    private final String duplicatedError = "Duplicated data";
 }

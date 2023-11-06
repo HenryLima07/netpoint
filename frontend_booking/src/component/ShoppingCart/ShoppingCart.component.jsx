@@ -2,14 +2,16 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { UseAuthContext } from "../../context/authContext";
+import { BookingFormService } from "../CanchaInd/CanchaInd.service";
+import { ISOtoOnlyDate, OverlapsHandler } from "../../utils/utils";
+import { ShoppingCartService } from "./ShoppingCart.service";
 
 import ShoppingCartItemComponent from "./ShoppingCartItem/ShoppingCartItem.component";
 import NoBorderButton from "../Buttons/NoBorderButton/NoBorderButton";
 
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
-import { ShoppingCartService } from "./ShoppingCart.service";
+import moment from "moment";
 
 const ShoppingCartComponent = ({
   className,
@@ -19,43 +21,101 @@ const ShoppingCartComponent = ({
 }) => {
   const { getElements, removeElement, clearShoppingCart, addElement } =
     ShoppingCartService();
+  /*Handler to save and verify in each item*/
+  const { SelectAllBookingsOnDate, CreateBooking } = BookingFormService();
 
-  const { user } = UseAuthContext();
+  const { user, token } = UseAuthContext();
   const [shoppingCartData, setShoppingCartData] = useState([]);
 
   //state to force items fetch they own day activities and compare
   const [fetchNow, setFecthNow] = useState(false);
 
+  //state to show item with overlap error
+  const [isOverlapping, setIsOverlapping] = useState(-1);
+
   const handleSetFetchNow = () => setFecthNow(!fetchNow);
 
   useEffect(() => {
-    const localShopping = getElements();
-    if (localShopping == null || localShopping.length < 0) return;
-    setShoppingCartData([]);
-    setShoppingCartData(localShopping);
+    handleShowItems();
   }, [toggleShoppingCart]);
 
   const onRemoveItem = (id) => {
     removeElement(id);
     const aux = shoppingCartData.filter((item, index) => index != id) || [];
     setShoppingCartData(aux);
+    setIsOverlapping(-1);
+    handleShowItems();
   };
 
-  const shoppingItems = shoppingCartData.map((item, index) => {
+  const handleShowItems = () => {
+    const localShopping = getElements();
+    if (localShopping == null || localShopping.length < 0) return;
+    setShoppingCartData([]);
+    setShoppingCartData(localShopping);
+  };
+
+  const shoppingItems = shoppingCartData.map((item) => {
     return (
       <ShoppingCartItemComponent
         item={item}
-        key={index}
-        onRemoveItem={() => onRemoveItem(index)}
+        key={item._id}
+        keyRef={item._id}
+        onRemoveItem={() => onRemoveItem(item._id)}
         fetchNow={fetchNow}
+        isOverlapping={isOverlapping}
       />
     );
   });
 
   const handlerComprar = () => {
     handleSetFetchNow();
-    // clearShoppingCart();
-    // setShoppingCartData([]);
+    HandleBooking();
+  };
+
+  //state to control overlapping
+  const HandleBooking = () => {
+    //check token users
+    if (!token) {
+      toast.warn("Se necesita iniciar sesión primero", {
+        toastId: "warning",
+      });
+      return;
+    }
+
+    const auxCartData = shoppingCartData;
+    auxCartData.forEach((item, index) => {
+      Booking(item, index);
+    });
+  };
+
+  const Booking = async (item, index) => {
+    //get al item information
+    const {
+      _id,
+      bookingType,
+      date,
+      startTime,
+      endTime,
+      comment,
+      rscTipoDePago,
+      canchaId,
+      estado,
+    } = item;
+
+    const response = await CreateBooking(
+      token,
+      bookingType,
+      new Date(date).toISOString(),
+      startTime,
+      endTime,
+      comment,
+      rscTipoDePago,
+      canchaId,
+      estado,
+    );
+    if (response == 422) setIsOverlapping(index);
+    else if (response.status == 200) onRemoveItem(_id);
+    handleShowItems();
   };
 
   return (
@@ -70,7 +130,6 @@ const ShoppingCartComponent = ({
             className="flex flex-col items-center px-2"
             onClick={() => {
               shoppingCartHandler(false);
-              setFecthNow(false);
             }}
           >
             <CloseIcon style={{ fontSize: "24px" }} />

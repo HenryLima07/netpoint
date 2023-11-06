@@ -25,7 +25,6 @@ const FieldBooking = ({ ...props }) => {
         endTime={props.endTime}
         title={props.title}
         selectedDate={props.selectedDate}
-        canchaId={props.canchaId}
         ToggleModalHandler={props.ToggleModalHandler}
         dateHandler={props.dateHandler}
         titleHandler={props.titleHandler}

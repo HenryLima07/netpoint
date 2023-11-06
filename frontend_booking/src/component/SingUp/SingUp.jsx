@@ -55,7 +55,6 @@ const SingUp =({})=>{
             return;
         }
 
-        console.log(data);
         
         await singUp( name, lastname, date, phone, email, password );
 

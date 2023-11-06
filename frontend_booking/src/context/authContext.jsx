@@ -102,7 +102,6 @@ export const AuthContextProvider = (props) =>{
                 perNombres, perApellidos, perFechaNac, perTelefono, perEmail, perClave
             });
 
-            console.log(data);
 
             toast.success("Registro de usuario exitoso", {
                 toastId: "success"

@@ -7,11 +7,13 @@ export const actualDate = () => {
 
 //gets string and return date with given characteristics
 export const StringToTime = (date) => {
-  return date.toLocaleTimeString("en-US", {
+  const formattedTime = date.toLocaleTimeString("en-US", {
     hour12: false,
     hour: "2-digit",
     minute: "2-digit",
   });
+  // Replace "24:00" with "00:00"
+  return formattedTime.replace("24", "00");
 };
 
 //return 12 hours time
@@ -23,7 +25,7 @@ export const StringToTime12Hours = (date) => {
 };
 
 export const ISOtoOnlyDate = (date) => {
-  return moment(date).format("yyyy-MM-DD");
+  return moment.utc(date).format("YYYY-MM-DD");
 };
 
 //return constructed time
@@ -58,6 +60,25 @@ export const OverlapsHandler = (startTime, endTime, eventsData) => {
       moment(startTime).isBetween(event.start, event.end) ||
       moment(endTime).isBetween(event.start, event.end) ||
       moment(event.start).isBetween(startTime, endTime)
+    );
+  });
+};
+//avoid overlapping hours on given date
+export const OverlapsAndDayHandler = (date, startTime, endTime, eventsData) => {
+  return eventsData.some((event) => {
+    //building dates
+    const start = FechaHoraMappingForCalendar(date, startTime);
+    const end = FechaHoraMappingForCalendar(date, endTime);
+    let eventStart = FechaHoraMappingForCalendar(event.date, event.startTime);
+    let eventEnd = FechaHoraMappingForCalendar(event.date, event.endTime);
+
+    return (
+      moment(date).isSame(ISOtoOnlyDate(event.date)) &&
+      (moment(start).isBetween(eventStart, eventEnd) ||
+        moment(end).isBetween(eventStart, eventEnd) ||
+        moment(eventStart).isBetween(start, end) ||
+        moment(eventEnd).isBetween(start, end) ||
+        (moment(start).isSame(eventStart) && moment(end).isSame(eventEnd)))
     );
   });
 };

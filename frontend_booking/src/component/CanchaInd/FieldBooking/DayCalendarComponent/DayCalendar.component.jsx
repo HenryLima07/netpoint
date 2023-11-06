@@ -32,16 +32,8 @@ const DayCalendar = ({ ...props }) => {
     setEventsData(events);
   }, [events]);
 
-  //states and effects to control counter for selection per calendar displayed
+  //states to control counter for selection per calendar displayed
   const [countSelections, setCountSelections] = useState(0);
-
-  useEffect(() => {
-    if (countSelections > 0) {
-      //force count selection to be 0 or 1 only
-      setCountSelections(countSelections - 1);
-      setEventsData(eventsData.splice(-1));
-    }
-  }, [countSelections]);
 
   const handleSelect = ({ start, end }) => {
     if (!eventsData) return;
@@ -55,8 +47,14 @@ const DayCalendar = ({ ...props }) => {
       return;
     }
 
-    //force effect run to validate once selection per calendar display
+    //force effect run to validate once selection per calendar display and validates only one selection
     setCountSelections(countSelections + 1);
+
+    if (countSelections > 0) {
+      let updatedData = eventsData;
+      setEventsData(updatedData.splice(-1));
+    }
+
     setStartTime(start);
     setEndTime(end);
 

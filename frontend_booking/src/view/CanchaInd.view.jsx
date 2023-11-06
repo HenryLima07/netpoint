@@ -94,7 +94,6 @@ const CanchaIndView = () => {
         setEventsHandler={setEventsHandler}
         clearSelectedTimeHandler={clearSelectedTime}
         data={data}
-        canchaId={id}
       />
       <Footer />
     </main>
