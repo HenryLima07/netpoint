@@ -1,0 +1,153 @@
+/* Custom CSS for react-big-calendar */
+
+/* Style the calendar container */
+.custom-moth-calendar .rbc-calendar {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Style the month header */
+.custom-moth-calendar .rbc-header {
+  background-color: black;
+  color: #fff;
+  padding: 0.5rem 1.2rem 0.5rem 1.2em;
+  font-weight: 500;
+}
+
+/* Style the month label in the header */
+.custom-moth-calendar .rbc-header .rbc-label {
+  font-size: 1.5rem;
+}
+
+/* Style the day labels (e.g., Sun, Mon, Tue) in the month view */
+.custom-moth-calendar .rbc-header .rbc-header-gutter {
+  background-color: #34495e;
+}
+
+/* Style the day labels text */
+.custom-moth-calendar .rbc-header .rbc-header-gutter .rbc-label {
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* Style the event container in the month view */
+.custom-moth-calendar .rbc-month-view {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the individual event blocks */
+.custom-moth-calendar .rbc-event {
+  background-color: rgba(0, 133, 255, 0.1);
+  color: #0085ff;
+  /* padding: 2px 2px 2px 2px; */
+  font-size: 0.8rem;
+}
+
+/* Style the event title text */
+.custom-moth-calendar .rbc-event-content {
+  font-weight: medium;
+}
+
+/* Style the event time text */
+.custom-moth-calendar .rbc-event-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* Style the 'Show More' link for events that overflow */
+.custom-moth-calendar .rbc-show-more {
+  background-color: #3498db;
+  color: #fff;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+/* Hover effect for events */
+.custom-moth-calendar .rbc-event:hover {
+  background-color: rgba(0, 133, 255, 0.3);
+}
+
+/* Style the previous and next month buttons in the header */
+.custom-moth-calendar .rbc-btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-moth-calendar .rbc-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/*added*/
+.custom-moth-calendar .rbc-toolbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.custom-moth-calendar .rbc-toolbar-label {
+  display: none;
+}
+.custom-moth-calendar .rbc-row.rbc-month-header div:first-child {
+  border-radius: 0.4rem 0 0 0;
+}
+.custom-moth-calendar .rbc-row.rbc-month-header div:last-child {
+  border-radius: 0 0.4rem 0 0;
+}
+.custom-moth-calendar .rbc-date-cell {
+  padding-left: 10px;
+  padding-top: 10px;
+  text-align: left;
+  color: #969696;
+  font-weight: 400;
+}
+
+.custom-moth-calendar .rbc-agenda-table tr th {
+  color: #fff;
+  padding: 0.5rem 1.2rem 0.5rem 1.2em !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+}
+.custom-moth-calendar .rbc-agenda-table tr th:first-child {
+  border-radius: 0.4rem 0 0 0;
+}
+.custom-moth-calendar .rbc-agenda-table tr th:last-child {
+  border-radius: 0 0.4rem 0 0;
+}
+.custom-moth-calendar .rbc-allday-cell {
+  display: none;
+}
+
+/*Day calendar*/
+.custom-moth-calendar .rbc-header.rbc-today,
+.custom-moth-calendar .rbc-time-header-content .rbc-header {
+  background-color: white;
+  color: black;
+  font-size: medium;
+}
+.custom-moth-calendar .rbc-time-header.rbc-overflowing,
+.custom-moth-calendar .rbc-time-header-content,
+.custom-moth-calendar .rbc-time-view {
+  border: none;
+}
+
+.custom-moth-calendar .rbc-event {
+  width: 90% !important;
+}
+.custom-moth-calendar .rbc-events-container {
+  background-color: transparent;
+}
+
+.custom-moth-calendar .rbc-today {
+  background-color: white;
+}
+
+.custom-moth-calendar .rbc-events-container .rbc-event {
+  border: 1px solid !important;
+}

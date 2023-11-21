@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import UserActivity from "./component/UserProfile/UserActivities/UserActivity.component";
 
 //views
 import Home from "./view/Home";
@@ -12,15 +13,17 @@ import UserProfileView from "./view/UserProfile.view";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/singin" element={<LoginView />} />
-      <Route path="/singup" element={<SingUpView />} />
-      <Route path="/user" element={<UserProfileView />} />
-      <Route path="/cancha/:id" element={<CanchaIndView />} />
-      <Route path="/cancha/*" element={<CanchaView />} />
-      <Route path="/*" element={<ErrorView />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/singin" element={<LoginView />} />
+        <Route path="/singup" element={<SingUpView />} />
+        <Route path="/user" element={<UserProfileView />} />
+        <Route path="/cancha/:id" element={<CanchaIndView />} />
+        <Route path="/cancha/*" element={<CanchaView />} />
+        <Route path="/*" element={<ErrorView />} />
+      </Routes>
+    </>
   );
 }
 

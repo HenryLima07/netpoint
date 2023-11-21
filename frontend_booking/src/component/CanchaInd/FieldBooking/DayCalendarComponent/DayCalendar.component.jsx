@@ -107,7 +107,7 @@ const DayCalendar = ({ ...props }) => {
       >
         <CloseIcon />
       </div>
-      <div className="w-[90%] h-[75%] flex justify-center font-inter bg-pure-white rounded-xl text-dark-gray">
+      <div className="w-[90%] h-[75%] flex justify-center font-inter font-medium bg-pure-white rounded-t-xl text-black p-2 md:px-6">
         <Calendar
           localizer={localizer}
           events={eventsData}
@@ -118,9 +118,9 @@ const DayCalendar = ({ ...props }) => {
           defaultView={views}
           defaultDate={selectedDate ? selectedDate : ""}
           views={views}
-          onSelectEvent={(event) => alert(event.title)}
+          onSelectEvent={() => {}}
           onSelectSlot={handleSelect}
-          className="custom-calendar"
+          className="custom-day-calendar"
         />
       </div>
       <div className="bg-pure-white px-6 py-4 flex flex-row items-center justify-center gap-10 md:px-10 md:py-5 w-[90%] rounded-b-xl">

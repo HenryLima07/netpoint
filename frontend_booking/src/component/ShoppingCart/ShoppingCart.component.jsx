@@ -22,7 +22,7 @@ const ShoppingCartComponent = ({
   const { getElements, removeElement, clearShoppingCart, addElement } =
     ShoppingCartService();
   /*Handler to save and verify in each item*/
-  const { SelectAllBookingsOnDate, CreateBooking } = BookingFormService();
+  const { CreateBooking } = BookingFormService();
 
   const { user, token } = UseAuthContext();
   const [shoppingCartData, setShoppingCartData] = useState([]);

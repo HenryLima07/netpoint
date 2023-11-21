@@ -72,29 +72,6 @@ export const BookingFormService = () => {
     }
   };
 
-  const BookingDateToEventsDateMapping = (data) => {
-    const date = new Date();
-    const y = date.getFullYear();
-    const m = date.getMonth();
-    const d = date.getDate();
-
-    if (!data) return null;
-
-    return data.map((event) => {
-      return {
-        title: TipoRerservaToTitleMapping(event.rscTipoReserva),
-        start: FechaHoraMappingForCalendar(
-          event.rscFechaReserva,
-          event.rscHoraDesde,
-        ),
-        end: FechaHoraMappingForCalendar(
-          event.rscFechaReserva,
-          event.rscHoraHasta,
-        ),
-      };
-    });
-  };
-
   const FetchCourt = async (id) => {
     startLoading();
     try {
@@ -109,7 +86,6 @@ export const BookingFormService = () => {
   const crud = {
     CreateBooking,
     SelectAllBookingsOnDate,
-    BookingDateToEventsDateMapping,
     FetchCourt,
   };
 

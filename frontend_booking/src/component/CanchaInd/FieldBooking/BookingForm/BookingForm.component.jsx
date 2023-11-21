@@ -18,7 +18,7 @@ import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-import { OverlapsAndDayHandler, actualDate } from "../../../../utils/utils";
+import { OverlapsAndDayHandler, actualDate, BookingDateToEventsDateMapping } from "../../../../utils/utils";
 import { BookingFormService } from "../../CanchaInd.service";
 import { ShoppingCartService } from "../../../ShoppingCart/ShoppingCart.service";
 import { useParams } from "react-router-dom";
@@ -33,7 +33,6 @@ const BookingForm = ({ ...props }) => {
   const {
     CreateBooking,
     SelectAllBookingsOnDate,
-    BookingDateToEventsDateMapping,
     FetchCourt,
   } = BookingFormService();
 
