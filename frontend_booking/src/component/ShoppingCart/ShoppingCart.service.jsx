@@ -1,7 +1,12 @@
+import { useState } from "react";
+import { UseAuthContext } from "../../context/authContext";
+
 const KEY_CANCHA = "shopppingFieldNTP";
 
 //To book field
 export const ShoppingCartFieldService = () => {
+  const { addFieldLength, removeFieldLength } = UseAuthContext();
+
   //public handlers ls
 
   const addFieldElement = (data) => {
@@ -11,7 +16,7 @@ export const ShoppingCartFieldService = () => {
 
     clearFieldShoppingCartField();
     setShoppingCartField(elements);
-
+    addFieldLength();
     return elements;
   };
 
@@ -23,17 +28,21 @@ export const ShoppingCartFieldService = () => {
     clearFieldShoppingCartField();
 
     setShoppingCartField(elements);
+    removeFieldLength();
   };
 
   const getFieldElements = () => {
     return getShoppingCartField();
   };
 
+  const fieldLSLength = () => getShoppingCartField().length || 0;
+
   const service = {
     addFieldElement,
     removeFieldElement,
     getFieldElements,
     clearFieldShoppingCartField,
+    fieldLSLength,
   };
 
   return service;
@@ -50,6 +59,8 @@ const clearFieldShoppingCartField = () => localStorage.removeItem(KEY_CANCHA);
 const KEY_PROMO = "shopppingPromoNTP";
 
 export const ShoppingCartPromoService = () => {
+  const { addPromoLength, removePromoLength } = UseAuthContext();
+
   const addPromoElement = (data) => {
     let elements = getShoppingCartPromo();
     data.type = "promo";
@@ -59,6 +70,7 @@ export const ShoppingCartPromoService = () => {
     clearFieldShoppingCartPromo();
     setShoppingCartPromo(elements);
 
+    addPromoLength();
     return elements;
   };
 
@@ -70,11 +82,13 @@ export const ShoppingCartPromoService = () => {
     clearFieldShoppingCartPromo();
 
     setShoppingCartPromo(elements);
+    removePromoLength();
   };
 
   const getPromoElements = () => {
     return getShoppingCartPromo();
   };
+
   const services = {
     addPromoElement,
     removePromoElement,

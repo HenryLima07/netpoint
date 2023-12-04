@@ -45,7 +45,7 @@ const ItemInformation = ({ item, className }) => {
 const ShoppingCartItemPromoComponent = ({ item, onRemoveItem }) => {
   return (
     <>
-      <div className="rounded-lg shadow-cards max-h-40 h-40 min-h-[8rem] md:h-52 min-w-[175px] w-full hover:scale-[1.02] transition-all duration-500 ease-in-out">
+      <div className="rounded-lg shadow-cards max-h-40 h-40 min-h-[10rem] md:h-52 min-w-[175px] w-full hover:scale-[1.02] transition-all duration-500 ease-in-out">
         <div className="flex flex-col md:flex-row w-full h-full relative">
           <button
             className="flex flex-col items-center p-2 absolute top-0 right-0 bg-pure-white rounded-bl-lg"

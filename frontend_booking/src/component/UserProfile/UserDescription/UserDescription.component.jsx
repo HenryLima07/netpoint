@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const UserDescription = ({ className, ...props }) => {
-  const { user, logout } = UseAuthContext();
+  const { user, logout, setFieldLength, setPromoLength } = UseAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +35,8 @@ const UserDescription = ({ className, ...props }) => {
             logout();
 
             localStorage.clear();
+            setFieldLength(0);
+            setPromoLength(0);
             navigate("/");
           }}
           className={

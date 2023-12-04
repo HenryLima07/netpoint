@@ -91,7 +91,7 @@ const Menu = () => {
       <MenuItemHash to={"/#home"} text={"inicio"} />
       <MenuItemLink to={"/cancha"} text={"canchas"} />
       <MenuItemHash to={"/#clases"} text={"clases"} />
-      <MenuItemHash to={"/#promos"} text={"promos"} />
+      <MenuItemHash to={"/#promo"} text={"promos"} />
       <MenuItemLink to={"/"} text={"nosotros"} />
 
       {user ? (

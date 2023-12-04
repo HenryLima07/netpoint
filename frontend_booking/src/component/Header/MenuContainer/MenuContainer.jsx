@@ -33,14 +33,21 @@ const NoUserButtons = ({ solid = false }) => {
   );
 };
 
-const UserButtons = ({ ...props }) => {
+const UserButtons = ({ itemsCart, ...props }) => {
   return (
     <div className="flex flex-row items-center justify-end gap-4 lg:gap-8 w-full min-w-1/4 hover:cursor-pointer">
       <button
         onClick={() => props.shoppingCartHandler(true)}
-        className="bg-pure-white px-2 py-1 border-2 border-black rounded-lg w-min"
+        className="bg-pure-white px-2 py-1 border-2 border-black rounded-lg w-min relative"
       >
         <ShoppingCartIcon style={{ fontSize: "24px" }} />
+        {itemsCart > 0 ? (
+          <div className=" rounded-full p-0 w-[22px] h-[22px] bg-light-gray text-pure-white text-[10px] font-semibold absolute top-[20px] right-[2px] ">
+            <p className=" relative -top-[5px]">{itemsCart}</p>
+          </div>
+        ) : (
+          <></>
+        )}
       </button>
       <div>
         <Link to={"/user"}>
@@ -56,7 +63,7 @@ const UserButtons = ({ ...props }) => {
 };
 
 const MenuContainer = ({ solid = false, ...props }) => {
-  const { user } = UseAuthContext();
+  const { user, itemsCart } = UseAuthContext();
 
   return (
     <article className="hidden md:flex flex-row justify-around items-center w-full lg:w-4/5 xl:w-3/4">
@@ -84,7 +91,11 @@ const MenuContainer = ({ solid = false, ...props }) => {
       </ul>
 
       <div className="w-full flex items-center justify-center">
-        {!user ? <NoUserButtons solid={solid} /> : <UserButtons {...props} />}
+        {!user ? (
+          <NoUserButtons solid={solid} />
+        ) : (
+          <UserButtons itemsCart={itemsCart} {...props} />
+        )}
       </div>
     </article>
   );
