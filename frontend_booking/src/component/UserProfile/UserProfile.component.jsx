@@ -40,7 +40,9 @@ const UserProfileComponent = () => {
         )}
 
         {UserUpdationSelected ? (
-          <UserUpdation className={" w-2/3 min-w-[250px]"} />
+          <UserUpdation
+            className={" w-full min-w-[260px] h-max md:ml-12 mt-6 md:mt-12 "}
+          />
         ) : (
           <></>
         )}

@@ -39,7 +39,7 @@ const ItemInformation = ({ item, className }) => {
   );
 };
 
-const ShoppingCartItemComponent = ({
+const ShoppingCartItemFieldComponent = ({
   item,
   onRemoveItem,
   isOverlapping,
@@ -82,4 +82,4 @@ const ShoppingCartItemComponent = ({
   );
 };
 
-export default ShoppingCartItemComponent;
+export default ShoppingCartItemFieldComponent;

@@ -18,23 +18,24 @@ import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-import { OverlapsAndDayHandler, actualDate, BookingDateToEventsDateMapping } from "../../../../utils/utils";
+import {
+  OverlapsAndDayHandler,
+  actualDate,
+  BookingDateToEventsDateMapping,
+} from "../../../../utils/utils";
 import { BookingFormService } from "../../CanchaInd.service";
-import { ShoppingCartService } from "../../../ShoppingCart/ShoppingCart.service";
+import { ShoppingCartFieldService } from "../../../ShoppingCart/ShoppingCart.service";
 import { useParams } from "react-router-dom";
 
 const BookingForm = ({ ...props }) => {
   //avoid overlapping elements on cart
   const [overlaps, setOverlaps] = useState(false);
   const { user, token } = UseAuthContext();
-  const { addElement, getElements } = ShoppingCartService();
+  const { addFieldElement, getFieldElements } = ShoppingCartFieldService();
   const { id } = useParams();
 
-  const {
-    CreateBooking,
-    SelectAllBookingsOnDate,
-    FetchCourt,
-  } = BookingFormService();
+  const { CreateBooking, SelectAllBookingsOnDate, FetchCourt } =
+    BookingFormService();
 
   //props element comes from cancha view
   const {
@@ -98,7 +99,7 @@ const BookingForm = ({ ...props }) => {
 
     //verify overlapping
     let _overlaps = false;
-    const eventsCart = getElements();
+    const eventsCart = getFieldElements();
     if (eventsCart) {
       _overlaps = OverlapsAndDayHandler(date, startTime, endTime, eventsCart);
     }
@@ -124,7 +125,7 @@ const BookingForm = ({ ...props }) => {
     }
 
     //saving in localstorage
-    addElement({
+    addFieldElement({
       _id: _id,
       bookingType: bookingType,
       date: new Date(date).toISOString(),

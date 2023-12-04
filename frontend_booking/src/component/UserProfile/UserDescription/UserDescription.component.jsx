@@ -6,23 +6,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const UserDescription = ({ className, ...props }) => {
-  const { user } = UseAuthContext();
+  const { user, logout } = UseAuthContext();
   const navigate = useNavigate();
-
-  //props
-  const {
-    handleUserActivitySelection,
-    handleUserUpdationSelection,
-    handleUserGeneralSelection,
-  } = props;
 
   useEffect(() => {
     if (!user) {
-      toast.warn("Tienes que iniciar sesión antes", { toastId: "warn" });
       navigate("/");
     }
   }, []);
-
   return (
     <article
       className={` flex flex-col pt-4 sm:m-4 md:m-7 sm:flex-row md:flex-col sm:items-center ${className}`}
@@ -41,15 +32,16 @@ const UserDescription = ({ className, ...props }) => {
         </h6>
         <NoBurderButton
           onClick={() => {
-            handleUserActivitySelection(false);
-            handleUserUpdationSelection(true);
-            handleUserGeneralSelection(false);
+            logout();
+
+            localStorage.clear();
+            navigate("/");
           }}
           className={
             " p-2 my-4 bg-[#DCDCDC] w-full text-black border border-light-gray text-sm md:text-base xl:text-lg font-medium "
           }
         >
-          Edita tu perfil
+          Cerrar sesión
         </NoBurderButton>
       </div>
     </article>

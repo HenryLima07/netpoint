@@ -15,6 +15,7 @@ import { UserGeneralProm } from "./UserServices/UserGeneralProms.service";
 import { UserActivities } from "./UserServices/UserActivities.service";
 
 import { BookingDateToEventsDateMapping } from "../../../utils/utils";
+import { ISOtoOnlyDate } from "../../../utils/utils";
 
 const localizer = momentLocalizer(moment);
 
@@ -149,8 +150,8 @@ const UserPromos = ({}) => {
         id={item.id}
         key={item.id}
         className={"w-1/4 min-w-[239px] md:min-w-[392px]"}
-        price={item.paqPrecio}
-        name={item.paqNombre}
+        price={item.paq.paqPrecio}
+        name={item.paq.paqNombre}
         displayButton={false}
       >
         <p className="text-sm sm:text-lg md:text-xl">

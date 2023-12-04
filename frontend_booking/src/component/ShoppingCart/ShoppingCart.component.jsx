@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useId } from "react";
 
 import { UseAuthContext } from "../../context/authContext";
 import { BookingFormService } from "../CanchaInd/CanchaInd.service";
 import { ISOtoOnlyDate, OverlapsHandler } from "../../utils/utils";
-import { ShoppingCartService } from "./ShoppingCart.service";
+import {
+  ShoppingCartFieldService,
+  ShoppingCartPromoService,
+} from "./ShoppingCart.service";
 
-import ShoppingCartItemComponent from "./ShoppingCartItem/ShoppingCartItem.component";
+import ShoppingCartItemFieldComponent from "./ShoppingCartItem/ShoppingCartItemField.component";
+import ShoppingCartItemPromoComponent from "./ShoppingCartItem/ShoppingCartItemPromo.component";
 import NoBorderButton from "../Buttons/NoBorderButton/NoBorderButton";
 
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import moment from "moment";
+import { BookingPromoServices } from "../Home/PromoSection/PromoService.service";
 
 const ShoppingCartComponent = ({
   className,
@@ -19,13 +24,28 @@ const ShoppingCartComponent = ({
   toggleShoppingCart = false,
   shoppingCartHandler,
 }) => {
-  const { getElements, removeElement, clearShoppingCart, addElement } =
-    ShoppingCartService();
+  //field services
+  const {
+    getFieldElements,
+    removeFieldElement,
+    clearFieldShoppingCart,
+    addFieldElement,
+  } = ShoppingCartFieldService();
+
+  //promo services
+  const {
+    getPromoElements,
+    removePromoElement,
+    clearPromoShoppingCart,
+    addPromoElement,
+  } = ShoppingCartPromoService();
   /*Handler to save and verify in each item*/
   const { CreateBooking } = BookingFormService();
+  const { CreatePromoBooking } = BookingPromoServices();
 
   const { user, token } = UseAuthContext();
-  const [shoppingCartData, setShoppingCartData] = useState([]);
+  const [shoppingCartFieldData, setShoppingCartFieldData] = useState([]);
+  const [shoppingCartPromoData, setShoppingCartPromoData] = useState([]);
 
   //state to force items fetch they own day activities and compare
   const [fetchNow, setFecthNow] = useState(false);
@@ -36,33 +56,64 @@ const ShoppingCartComponent = ({
   const handleSetFetchNow = () => setFecthNow(!fetchNow);
 
   useEffect(() => {
-    handleShowItems();
+    handleShowFieldItems();
+    handleShowPromoItems();
   }, [toggleShoppingCart]);
 
-  const onRemoveItem = (id) => {
-    removeElement(id);
-    const aux = shoppingCartData.filter((item, index) => index != id) || [];
-    setShoppingCartData(aux);
+  //remove field items
+  const onRemoveFieldItem = (id) => {
+    removeFieldElement(id);
+    const aux =
+      shoppingCartFieldData.filter((item, index) => index != id) || [];
+    setShoppingCartFieldData(aux);
     setIsOverlapping(-1);
-    handleShowItems();
+    handleShowFieldItems();
   };
 
-  const handleShowItems = () => {
-    const localShopping = getElements();
+  //remove promo items
+  const onRemovePromoItem = (id) => {
+    removePromoElement(id);
+    const aux =
+      shoppingCartPromoData.filter((item, index) => index != id) || [];
+    setShoppingCartPromoData(aux);
+    handleShowPromoItems();
+  };
+
+  //handler for field items show
+  const handleShowFieldItems = () => {
+    const localShopping = getFieldElements();
     if (localShopping == null || localShopping.length < 0) return;
-    setShoppingCartData([]);
-    setShoppingCartData(localShopping);
+    setShoppingCartFieldData([]);
+    setShoppingCartFieldData(localShopping);
   };
 
-  const shoppingItems = shoppingCartData.map((item) => {
+  //handler for promo items show
+  const handleShowPromoItems = () => {
+    const localShopping = getPromoElements();
+    if (localShopping == null || localShopping.length < 0) return;
+    setShoppingCartPromoData([]);
+    setShoppingCartPromoData(localShopping);
+  };
+
+  const shoppingFieldItems = shoppingCartFieldData.map((item) => {
     return (
-      <ShoppingCartItemComponent
+      <ShoppingCartItemFieldComponent
         item={item}
         key={item._id}
         keyRef={item._id}
-        onRemoveItem={() => onRemoveItem(item._id)}
+        onRemoveFieldItem={() => onRemoveFieldItem(item._id)}
         fetchNow={fetchNow}
         isOverlapping={isOverlapping}
+      />
+    );
+  });
+  const shoppingPromoItems = shoppingCartPromoData.map((item) => {
+    return (
+      <ShoppingCartItemPromoComponent
+        item={item}
+        key={item._id}
+        onRemoveItem={() => onRemovePromoItem(item._id)}
+        fetchNow={fetchNow}
       />
     );
   });
@@ -81,14 +132,48 @@ const ShoppingCartComponent = ({
       });
       return;
     }
-
-    const auxCartData = shoppingCartData;
-    auxCartData.forEach((item, index) => {
-      Booking(item, index);
+    const auxCartPromoData = shoppingCartPromoData;
+    console.log(auxCartPromoData);
+    auxCartPromoData.forEach((item, index) => {
+      PromoBooking(item, index);
+    });
+    const auxCartFieldData = shoppingCartFieldData;
+    auxCartFieldData.forEach((item, index) => {
+      FieldBooking(item, index);
     });
   };
 
-  const Booking = async (item, index) => {
+  //handler promo booking
+  const PromoBooking = async (item, index) => {
+    //get al item information
+    const {
+      _id,
+      paqTipo,
+      paqCantidad,
+      paqFechaDesde,
+      paqFechaHasta,
+      paqLinkPago,
+      paqNombre,
+      paqPrecio,
+      id,
+    } = item;
+    const paqEstado = "PEN";
+    const restrinctions = "Ninungo";
+    const paqDescuento = 60.5;
+    const response = await CreatePromoBooking(
+      token,
+      id,
+      paqEstado,
+      restrinctions,
+      paqCantidad,
+      paqPrecio,
+      paqDescuento,
+    );
+    if (response.status == 200) onRemovePromoItem(_id);
+    handleShowFieldItems();
+  };
+  //handler field booking
+  const FieldBooking = async (item, index) => {
     //get al item information
     const {
       _id,
@@ -102,7 +187,7 @@ const ShoppingCartComponent = ({
       estado,
     } = item;
 
-    const response = await CreateBooking(
+    const response = await FieldBooking(
       token,
       bookingType,
       new Date(date).toISOString(),
@@ -115,7 +200,7 @@ const ShoppingCartComponent = ({
     );
     if (response == 422) setIsOverlapping(index);
     else if (response.status == 200) onRemoveItem(_id);
-    handleShowItems();
+    handleShowFieldItems();
   };
 
   return (
@@ -138,7 +223,8 @@ const ShoppingCartComponent = ({
       </div>
 
       <div className="w-5/6 min-h-[33rem] md:min-h-[45rem] flex flex-col gap-9 md:gap-5 overflow-y-scroll overflow-x-hidden items-center self-center">
-        {shoppingCartData.length > 0 ? shoppingItems : <></>}
+        {shoppingCartPromoData.length > 0 ? shoppingPromoItems : <></>}
+        {shoppingCartFieldData.length > 0 ? shoppingFieldItems : <></>}
       </div>
 
       <div className="self-center h-full flex justify-end font-bebas">

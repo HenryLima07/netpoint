@@ -25,6 +25,7 @@ export const StringToTime12Hours = (date) => {
 };
 
 export const ISOtoOnlyDate = (date) => {
+  if (!date) return;
   return moment.utc(date).format("YYYY-MM-DD");
 };
 
