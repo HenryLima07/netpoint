@@ -53,12 +53,29 @@ const ShoppingCartComponent = ({
   //state to show item with overlap error
   const [isOverlapping, setIsOverlapping] = useState(-1);
 
+  //state to show total on pay
+  const [totalPay, setTotalPay] = useState(0);
+
   const handleSetFetchNow = () => setFecthNow(!fetchNow);
 
   useEffect(() => {
     handleShowFieldItems();
     handleShowPromoItems();
   }, [toggleShoppingCart]);
+
+  //handling total to pay effect
+  useEffect(() => {
+    let total = 0;
+    shoppingCartPromoData.forEach((item) => {
+      total += item.paqPrecio;
+    });
+    //TODO: change this for original cancha price
+    shoppingCartFieldData.forEach((item) => {
+      total += 15;
+    });
+
+    setTotalPay(total);
+  }, [shoppingCartFieldData, shoppingCartPromoData]);
 
   //remove field items
   const onRemoveFieldItem = (id) => {
@@ -101,7 +118,11 @@ const ShoppingCartComponent = ({
         item={item}
         key={item._id}
         keyRef={item._id}
-        onRemoveFieldItem={() => onRemoveFieldItem(item._id)}
+        onRemoveFieldItem={() => {
+          //TODO: change this to current total field price
+          setTotalPay(totalPay - 15);
+          onRemoveFieldItem(item._id);
+        }}
         fetchNow={fetchNow}
         isOverlapping={isOverlapping}
       />
@@ -112,7 +133,10 @@ const ShoppingCartComponent = ({
       <ShoppingCartItemPromoComponent
         item={item}
         key={item._id}
-        onRemoveItem={() => onRemovePromoItem(item._id)}
+        onRemoveItem={() => {
+          setTotalPay(totalPay - item.paqPrecio);
+          onRemovePromoItem(item._id);
+        }}
         fetchNow={fetchNow}
       />
     );
@@ -199,44 +223,52 @@ const ShoppingCartComponent = ({
       estado,
     );
     if (response == 422) setIsOverlapping(index);
-    else if (response.status == 200) onRemoveItem(_id);
+    else if (response.status == 200) onRemoveFieldItem(_id);
     handleShowFieldItems();
   };
-
   return (
-    <aside
-      className={`font-inter text-dark-gray bg-pure-white h-full fixed flex flex-col rounded-bl-2xl rounded-tl-2xl py-6 px-2 md:p-6 pr-2 transition-all ease-linear duration-500 min-w-80 w-3/4 md:w-2/3 lg:w-2/4 2xl:w-2/5 -right-[100rem] top-0 bottom-0 shadow-md shadow-black z-20 ${
-        toggleShoppingCart ? "-translate-x-[100rem]" : " invisible"
-      }`}
-    >
-      <div className="flex flex-col mb-6">
-        <div className="flex flex-row justify-end items-center">
-          <button
-            className="flex flex-col items-center px-2"
-            onClick={() => {
-              shoppingCartHandler(false);
-            }}
-          >
-            <CloseIcon style={{ fontSize: "24px" }} />
-          </button>
+    <>
+      <aside
+        className={`font-inter text-dark-gray bg-pure-white h-full fixed flex flex-col rounded-bl-2xl rounded-tl-2xl py-6 px-2 md:p-6 pr-2 transition-all ease-linear duration-500 min-w-80 w-3/4 md:w-2/3 lg:w-2/4 2xl:w-2/5 -right-[100rem] top-0 bottom-0 shadow-md shadow-black z-30 ${
+          toggleShoppingCart ? "-translate-x-[100rem]" : " invisible"
+        }`}
+      >
+        <div className="flex flex-col mb-6">
+          <div className="flex flex-row justify-end items-center">
+            <button
+              className="flex flex-col items-center px-2"
+              onClick={() => {
+                shoppingCartHandler(false);
+              }}
+            >
+              <CloseIcon style={{ fontSize: "24px" }} />
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="w-5/6 min-h-[33rem] md:min-h-[45rem] flex flex-col gap-9 md:gap-5 overflow-y-scroll overflow-x-hidden items-center self-center">
-        {shoppingCartPromoData.length > 0 ? shoppingPromoItems : <></>}
-        {shoppingCartFieldData.length > 0 ? shoppingFieldItems : <></>}
-      </div>
-
-      <div className="self-center h-full flex justify-end font-bebas">
-        <NoBorderButton
-          handleClick={handlerComprar}
-          className={` justify-self-center self-center flex flex-row items-center gap-3 pl-6 pr-3 py-3 bg-dark-gray text-pure-white text-base md:pl-7 md:pr-4 md:py-4 md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl`}
-        >
-          Comprar ahora
-          <ShoppingCartIcon style={{ fontSize: "24px" }} />
-        </NoBorderButton>
-      </div>
-    </aside>
+        <div className="w-5/6 min-h-[33rem] md:min-h-[45rem] flex flex-col gap-9 md:gap-5 overflow-y-scroll overflow-x-hidden items-center self-center">
+          {shoppingCartPromoData.length > 0 ? shoppingPromoItems : <></>}
+          {shoppingCartFieldData.length > 0 ? shoppingFieldItems : <></>}
+        </div>
+        <div className=" self-center text-dark-gray text-base font-bebas mt-1 md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl">
+          Total: ${totalPay.toFixed(2)}
+        </div>
+        <div className="self-center h-full flex justify-end font-bebas">
+          <NoBorderButton
+            handleClick={handlerComprar}
+            className={` justify-self-center self-center flex flex-row items-center gap-3 pl-6 pr-3 py-3 bg-dark-gray text-pure-white text-base md:pl-7 md:pr-4 md:py-4 md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl`}
+          >
+            Comprar ahora
+            <ShoppingCartIcon style={{ fontSize: "24px" }} />
+          </NoBorderButton>
+        </div>
+      </aside>
+      <div
+        className={`w-full h-screen bg-dark-gray opacity-25 absolute top-0 left-0 z-20 ${
+          toggleShoppingCart ? " block" : " invisible"
+        }`}
+      ></div>
+    </>
   );
 };
 

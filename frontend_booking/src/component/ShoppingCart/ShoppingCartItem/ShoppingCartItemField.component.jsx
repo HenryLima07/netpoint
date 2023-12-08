@@ -41,7 +41,7 @@ const ItemInformation = ({ item, className }) => {
 
 const ShoppingCartItemFieldComponent = ({
   item,
-  onRemoveItem,
+  onRemoveFieldItem,
   isOverlapping,
   keyRef,
 }) => {
@@ -51,7 +51,7 @@ const ShoppingCartItemFieldComponent = ({
         <div className="flex flex-col md:flex-row w-full h-full relative">
           <button
             className="flex flex-col items-center p-2 absolute top-0 right-0 bg-pure-white rounded-bl-lg"
-            onClick={() => onRemoveItem()}
+            onClick={() => onRemoveFieldItem()}
           >
             <div
               className={`${
